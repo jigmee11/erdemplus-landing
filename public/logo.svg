@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+  <!-- Top-left piece (golden) -->
+  <path d="M4 4 h28 v28 h-28 z" fill="#E8A838" rx="3"/>
+  <rect x="4" y="4" width="28" height="28" rx="3" fill="#E8A838"/>
+  <!-- connector nub right -->
+  <rect x="30" y="14" width="6" height="8" rx="2" fill="#E8A838"/>
+  <!-- connector nub bottom -->
+  <rect x="14" y="30" width="8" height="6" rx="2" fill="#E8A838"/>
+  
+  <!-- Top-right piece (orange) -->
+  <rect x="44" y="4" width="28" height="28" rx="3" fill="#C85A2A"/>
+  <!-- socket left -->
+  <rect x="38" y="14" width="6" height="8" rx="2" fill="#FAF6EE"/>
+  <!-- connector nub bottom -->
+  <rect x="54" y="30" width="8" height="6" rx="2" fill="#C85A2A"/>
+  
+  <!-- Bottom-left piece (golden) -->
+  <rect x="4" y="44" width="28" height="28" rx="3" fill="#E8A838"/>
+  <!-- socket top -->
+  <rect x="14" y="38" width="8" height="6" rx="2" fill="#FAF6EE"/>
+  <!-- connector nub right -->
+  <rect x="30" y="54" width="6" height="8" rx="2" fill="#E8A838"/>
+  
+  <!-- Bottom-right piece (orange) -->
+  <rect x="44" y="44" width="28" height="28" rx="3" fill="#C85A2A"/>
+  <!-- socket top -->
+  <rect x="54" y="38" width="8" height="6" rx="2" fill="#FAF6EE"/>
+  <!-- socket left -->
+  <rect x="38" y="54" width="6" height="8" rx="2" fill="#FAF6EE"/>
+</svg>

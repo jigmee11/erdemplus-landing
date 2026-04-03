@@ -1,26 +1,122 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --cream: #FAF6EE;
+  --yellow: #E8A838;
+  --orange: #C85A2A;
+  --brown: #5C1F1F;
+  --brown-light: #8B4513;
+  --brown-muted: #9B7B6B;
+  --white: #FFFFFF;
+  --card-shadow: 0 4px 24px rgba(92, 31, 31, 0.08);
+  --card-shadow-hover: 0 12px 40px rgba(92, 31, 31, 0.16);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-cream: var(--cream);
+  --color-yellow: var(--yellow);
+  --color-orange: var(--orange);
+  --color-brown: var(--brown);
+  --font-serif: var(--font-playfair);
+  --font-sans: var(--font-source-sans);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--cream);
+  color: var(--brown);
+  font-family: var(--font-source-sans), 'Source Sans 3', Georgia, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
+
+.font-serif {
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+}
+
+/* Puzzle piece decorative motif */
+.puzzle-bg {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23E8A838' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Grain texture overlay */
+.grain::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  z-index: 9999;
+  opacity: 0.03;
+}
+
+/* Warm gradient mesh */
+.gradient-mesh {
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(232, 168, 56, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 85% 30%, rgba(200, 90, 42, 0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 50% at 50% 90%, rgba(232, 168, 56, 0.07) 0%, transparent 50%),
+    var(--cream);
+}
+
+/* Section divider wave */
+.wave-divider {
+  position: relative;
+}
+.wave-divider::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: var(--cream);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+}
+
+@keyframes float-delayed {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-14px) rotate(-2deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232, 168, 56, 0.3); }
+  50% { box-shadow: 0 0 0 12px rgba(232, 168, 56, 0); }
+}
+
+.float { animation: float 6s ease-in-out infinite; }
+.float-delayed { animation: float-delayed 7s ease-in-out infinite 1s; }
+.pulse-glow { animation: pulse-glow 2.5s ease-in-out infinite; }
+
+/* Underline decoration */
+.underline-warm {
+  position: relative;
+  display: inline-block;
+}
+.underline-warm::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--yellow), var(--orange));
+  border-radius: 2px;
+  transform-origin: left;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--yellow); border-radius: 3px; }
