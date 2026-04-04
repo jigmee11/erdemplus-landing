@@ -16,9 +16,9 @@ const PATH_BR = 'm 150.15713,208.41556 h 58.53656 v -58.53657 l -26.47537,-0.161
 
 const PIECES = [
   { path: PATH_TL, fill: '#edaa3f', from: { x: -60, y: -60 }, delay: 0 },
-  { path: PATH_TR, fill: '#e26735', from: { x: 60, y: -60 }, delay: 0.15 },
-  { path: PATH_BL, fill: '#edaa3f', from: { x: -60, y: 60 }, delay: 0.3 },
-  { path: PATH_BR, fill: '#e26735', from: { x: 60, y: 60 }, delay: 0.45 },
+  { path: PATH_BL, fill: '#edaa3f', from: { x: -60, y: 60 }, delay: 0.15 },
+  { path: PATH_BR, fill: '#e26735', from: { x: 60, y: 60 }, delay: 0.3 },
+  { path: PATH_TR, fill: '#e26735', from: { x: 60, y: -60 }, delay: 0.45 },
 ] as const;
 
 // ─── Progress bar ─────────────────────────────────────────────────────────────
@@ -53,19 +53,27 @@ function ProgressBar({ startDelay, hide }: { startDelay: number; hide: boolean }
 // ─── Splash ───────────────────────────────────────────────────────────────────
 
 export default function SplashScreen() {
-  const [phase, setPhase] = useState<'pending' | 'assembling' | 'flying' | 'done'>('assembling');
+  const [phase, setPhase] = useState<'pending' | 'assembling' | 'flying' | 'done'>('pending');
   const logoRef = useRef<HTMLDivElement>(null);
   const [flyTarget, setFlyTarget] = useState({ x: 0, y: 0, scale: 1 });
 
   // Check sessionStorage once on mount
-  // useEffect(() => {
-  //   if (sessionStorage.getItem('erdem-splash-shown')) {
-  //     setPhase('done');
-  //   } else {
-  //     sessionStorage.setItem('erdem-splash-shown', '1');
-  //     setPhase('assembling');
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (sessionStorage.getItem('erdem-splash-shown')) {
+      setPhase('done');
+    } else {
+      sessionStorage.setItem('erdem-splash-shown', '1');
+      setPhase('assembling');
+    }
+  }, []);
+
+  // Hide the navbar logo while splash is active
+  useEffect(() => {
+    if (phase === 'assembling' || phase === 'flying') {
+      const navEl = navLogoRef.current;
+      if (navEl) navEl.style.opacity = '0';
+    }
+  }, [phase]);
 
   // After assembly animation completes, start the fly phase
   useEffect(() => {
@@ -99,10 +107,18 @@ export default function SplashScreen() {
     return () => clearTimeout(timer);
   }, [phase]);
 
-  // After flying animation settles, unmount
+  // After flying animation settles, reveal navbar logo and unmount splash
   useEffect(() => {
     if (phase !== 'flying') return;
-    const timer = setTimeout(() => setPhase('done'), 600);
+    const timer = setTimeout(() => {
+      // Fade the real navbar logo in
+      const navEl = navLogoRef.current;
+      if (navEl) {
+        navEl.style.transition = 'opacity 0.15s ease-out';
+        navEl.style.opacity = '1';
+      }
+      setPhase('done');
+    }, 600);
     return () => clearTimeout(timer);
   }, [phase]);
 
