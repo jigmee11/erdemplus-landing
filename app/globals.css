@@ -18,7 +18,7 @@
   --color-orange: var(--orange);
   --color-brown: var(--brown);
   --font-serif: var(--font-playfair);
-  --font-sans: var(--font-source-sans);
+  --font-sans: var(--font-dm-sans);
 }
 
 * {
@@ -32,7 +32,7 @@ html {
 body {
   background: var(--cream);
   color: var(--brown);
-  font-family: var(--font-source-sans), 'Source Sans 3', Georgia, sans-serif;
+  font-family: var(--font-dm-sans), 'DM Sans', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 

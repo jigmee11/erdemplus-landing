@@ -1,51 +1,41 @@
 "use client";
 
 import Image from "next/image";
+import logoImg from "./assets/logo.svg";
+import { navLogoRef } from "@/components/navLogoRef";
 import { useState, useRef, useEffect } from "react";
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import {
   BookOpen, Brain, LineChart, Video, Users, Target,
   Star, ArrowRight, CheckCircle, ChevronRight, Mail,
   Globe, Share2, Link, AtSign, Sparkles,
-  TrendingUp, Award, Clock, BarChart3, User
+  TrendingUp, Award, Clock, BarChart3, User,
+  Cross
 } from "lucide-react";
 
-// ─── Logo SVG ───────────────────────────────────────────────────────────────
-function LogoMark({ size = 48 }: { size?: number }) {
-  const s = size;
-  const u = s / 10;
+// ─── Logo ────────────────────────────────────────────────────────────────────
+function LogoMark({ size = 48, registerRef = false }: { size?: number; registerRef?: boolean }) {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (registerRef) navLogoRef.current = ref.current;
+  }, [registerRef]);
   return (
-    <svg width={s} height={s} viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-      {/* Top-left golden */}
-      <rect x="4" y="4" width="32" height="32" rx="4" fill="#E8A838" />
-      <rect x="33" y="15" width="7" height="10" rx="2.5" fill="#E8A838" />
-      <rect x="15" y="33" width="10" height="7" rx="2.5" fill="#E8A838" />
-      {/* Top-right orange */}
-      <rect x="44" y="4" width="32" height="32" rx="4" fill="#C85A2A" />
-      <rect x="37" y="15" width="7" height="10" rx="2.5" fill="#FAF6EE" />
-      <rect x="54" y="33" width="10" height="7" rx="2.5" fill="#C85A2A" />
-      {/* Bottom-left golden */}
-      <rect x="4" y="44" width="32" height="32" rx="4" fill="#E8A838" />
-      <rect x="15" y="37" width="10" height="7" rx="2.5" fill="#FAF6EE" />
-      <rect x="33" y="55" width="7" height="10" rx="2.5" fill="#E8A838" />
-      {/* Bottom-right orange */}
-      <rect x="44" y="44" width="32" height="32" rx="4" fill="#C85A2A" />
-      <rect x="54" y="37" width="10" height="7" rx="2.5" fill="#FAF6EE" />
-      <rect x="37" y="55" width="7" height="10" rx="2.5" fill="#FAF6EE" />
-    </svg>
+    <div ref={ref} style={{ width: size, height: size }}>
+      <Image src={logoImg} alt="ERDEM+ puzzle logo" width={size} height={size} priority />
+    </div>
   );
 }
 
-function Logo({ size = 48 }: { size?: number }) {
+function Logo({ size = 48, registerRef = false }: { size?: number; registerRef?: boolean }) {
   const textSize = size * 0.45;
   return (
-    <div className="flex items-center gap-3">
-      <LogoMark size={size} />
+    <div className="flex items-center gap-1">
+      <LogoMark size={size} registerRef={registerRef} />
       <span
         className="font-serif font-bold tracking-tight leading-none"
         style={{ fontSize: textSize, color: "#5C1F1F" }}
       >
-        ERDEM<span style={{ color: "#C85A2A" }}>+</span>
+        ERDEM<span style={{ color: "#E8A838", fontWeight: '100' }}>✚</span>
       </span>
     </div>
   );
@@ -310,21 +300,21 @@ export default function LandingPage() {
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="fixed top-0 left-0 right-0 z-50 px-6 py-4"
+        className="fixed top-0 left-0 right-0 z-50 px-6 py-5"
         style={{
           background: "rgba(250, 246, 238, 0.88)",
           backdropFilter: "blur(14px)",
-          borderBottom: "1px solid rgba(232, 168, 56, 0.15)",
+          borderBottom: "1px solid rgba(232, 168, 56, 0.12)",
         }}
       >
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <Logo size={40} />
-          <div className="hidden md:flex items-center gap-8">
+          <Logo size={36} registerRef />
+          <div className="hidden md:flex items-center gap-10">
             {["How It Works", "Features", "Counselors", "Testimonials"].map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
-                className="text-sm font-medium transition-colors"
+                className="text-[0.8125rem] font-medium tracking-wide transition-colors"
                 style={{ color: "#9B7B6B" }}
                 onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "#5C1F1F")}
                 onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "#9B7B6B")}
@@ -335,7 +325,7 @@ export default function LandingPage() {
           </div>
           <button
             onClick={scrollToWaitlist}
-            className="text-sm font-semibold px-5 py-2.5 rounded-full transition-all"
+            className="text-[0.8125rem] font-semibold px-6 py-2.5 rounded-full transition-all"
             style={{
               background: "#5C1F1F",
               color: "#FAF6EE",
@@ -382,14 +372,14 @@ export default function LandingPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 text-sm font-semibold"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-7 text-xs font-semibold tracking-wide"
                 style={{
                   background: "rgba(232, 168, 56, 0.15)",
                   color: "#C85A2A",
                   border: "1px solid rgba(232, 168, 56, 0.3)",
                 }}
               >
-                <Sparkles size={14} />
+                <Sparkles size={13} />
                 Now accepting waitlist — limited spots
               </motion.div>
 
@@ -397,8 +387,8 @@ export default function LandingPage() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.2, ease: [0.21, 0.47, 0.32, 0.98] }}
-                className="font-serif font-bold leading-[1.1] tracking-tight mb-6"
-                style={{ fontSize: "clamp(2.6rem, 6vw, 4.2rem)", color: "#5C1F1F" }}
+                className="font-serif font-bold leading-[1.08] tracking-tight mb-7"
+                style={{ fontSize: "clamp(2.4rem, 5.5vw, 3.8rem)", color: "#5C1F1F" }}
               >
                 Master the SAT.{" "}
                 <span
@@ -417,10 +407,10 @@ export default function LandingPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.35 }}
-                className="text-lg leading-relaxed mb-10 max-w-lg"
+                className="text-[1.0625rem] leading-[1.7] mb-10 max-w-lg"
                 style={{ color: "#9B7B6B" }}
               >
-                ERDEM+ combines intelligent self-paced learning with real 1-on-1 expert counseling
+                ERDEM PLUS combines intelligent self-paced learning with real 1-on-1 expert counseling
                 — so you get the flexibility of an app and the results of a private tutor.
               </motion.p>
 
@@ -434,7 +424,7 @@ export default function LandingPage() {
                   onClick={scrollToWaitlist}
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.97 }}
-                  className="group flex items-center gap-2 px-7 py-4 rounded-full font-semibold text-base shadow-lg transition-all"
+                  className="group flex items-center gap-2.5 px-7 py-4 rounded-full font-semibold text-[0.9375rem] shadow-lg transition-all"
                   style={{
                     background: "linear-gradient(135deg, #C85A2A, #A0451F)",
                     color: "#FAF6EE",
@@ -463,12 +453,12 @@ export default function LandingPage() {
                 }}
               >
                 {/* Card header */}
-                <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center justify-between mb-5">
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: "#9B7B6B" }}>
+                    <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] mb-1" style={{ color: "#9B7B6B" }}>
                       Your Progress
                     </p>
-                    <p className="font-serif font-bold text-xl" style={{ color: "#5C1F1F" }}>
+                    <p className="font-serif font-bold text-lg" style={{ color: "#5C1F1F" }}>
                       Score Trajectory
                     </p>
                   </div>
@@ -586,7 +576,7 @@ export default function LandingPage() {
 
       {/* ── Stats Bar ──────────────────────────────────────────────────────── */}
       <section
-        className="py-16 relative"
+        className="py-20 relative"
         style={{
           background: "#5C1F1F",
           overflow: "hidden",
@@ -597,20 +587,20 @@ export default function LandingPage() {
           style={{ filter: "invert(1) brightness(0.3)" }}
         />
         <div className="max-w-5xl mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
             {stats.map((s, i) => (
               <FadeIn key={s.label} delay={i * 0.1} direction="up">
                 <div className="text-center">
                   <div
-                    className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4"
+                    className="w-11 h-11 rounded-full flex items-center justify-center mx-auto mb-4"
                     style={{ background: "rgba(232,168,56,0.15)" }}
                   >
-                    <s.icon size={22} color="#E8A838" />
+                    <s.icon size={20} color="#E8A838" />
                   </div>
-                  <p className="font-serif font-bold text-4xl mb-1" style={{ color: "#FAF6EE" }}>
+                  <p className="font-serif font-bold text-3xl mb-1.5" style={{ color: "#FAF6EE" }}>
                     <AnimatedCounter target={s.value} suffix={s.suffix} />
                   </p>
-                  <p className="text-sm" style={{ color: "rgba(250,246,238,0.55)" }}>
+                  <p className="text-[0.8125rem] leading-snug" style={{ color: "rgba(250,246,238,0.5)" }}>
                     {s.label}
                   </p>
                 </div>
@@ -621,28 +611,28 @@ export default function LandingPage() {
       </section>
 
       {/* ── How It Works ───────────────────────────────────────────────────── */}
-      <section id="how-it-works" className="py-28 px-6 relative overflow-hidden">
+      <section id="how-it-works" className="py-32 px-6 relative overflow-hidden">
         <div className="absolute top-16 right-0 pointer-events-none opacity-40 hidden lg:block">
           <PuzzlePiece color="#E8A838" size={200} opacity={0.05} rotate={10} />
         </div>
         <div className="max-w-5xl mx-auto">
           <FadeIn direction="up" className="text-center mb-4">
             <span
-              className="inline-block text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-5"
+              className="inline-block text-[0.6875rem] font-bold uppercase tracking-[0.1em] px-4 py-2 rounded-full mb-5"
               style={{ background: "rgba(232,168,56,0.12)", color: "#C85A2A" }}
             >
               The Process
             </span>
           </FadeIn>
-          <FadeIn direction="up" delay={0.1} className="text-center mb-16">
+          <FadeIn direction="up" delay={0.1} className="text-center mb-20">
             <h2
-              className="font-serif font-bold mb-4"
-              style={{ fontSize: "clamp(2rem, 4vw, 3rem)", color: "#5C1F1F" }}
+              className="font-serif font-bold mb-5"
+              style={{ fontSize: "clamp(1.875rem, 4vw, 2.75rem)", color: "#5C1F1F" }}
             >
               Three steps to your{" "}
               <em style={{ color: "#C85A2A" }}>best score</em>
             </h2>
-            <p className="max-w-xl mx-auto text-base leading-relaxed" style={{ color: "#9B7B6B" }}>
+            <p className="max-w-xl mx-auto text-[0.9375rem] leading-[1.75]" style={{ color: "#9B7B6B" }}>
               ERDEM+ turns a complex journey into a clear, structured path — with technology that adapts
               and humans who care.
             </p>
@@ -683,12 +673,12 @@ export default function LandingPage() {
                       </div>
                     </div>
                     <h3
-                      className="font-serif font-bold text-xl mb-3"
+                      className="font-serif font-bold text-lg mb-3"
                       style={{ color: "#5C1F1F" }}
                     >
                       {step.title}
                     </h3>
-                    <p className="text-sm leading-relaxed" style={{ color: "#9B7B6B" }}>
+                    <p className="text-[0.8125rem] leading-[1.7]" style={{ color: "#9B7B6B" }}>
                       {step.description}
                     </p>
                   </div>
@@ -706,35 +696,35 @@ export default function LandingPage() {
       {/* ── Features ───────────────────────────────────────────────────────── */}
       <section
         id="features"
-        className="py-28 px-6 relative"
+        className="py-32 px-6 relative"
         style={{ background: "#FFFDF8" }}
       >
         <div className="absolute bottom-0 left-0 pointer-events-none hidden lg:block opacity-30">
           <PuzzlePiece color="#C85A2A" size={180} opacity={0.06} rotate={-15} />
         </div>
         <div className="max-w-5xl mx-auto">
-          <FadeIn direction="up" className="text-center mb-16">
+          <FadeIn direction="up" className="text-center mb-20">
             <span
-              className="inline-block text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-5"
+              className="inline-block text-[0.6875rem] font-bold uppercase tracking-[0.1em] px-4 py-2 rounded-full mb-5"
               style={{ background: "rgba(200,90,42,0.1)", color: "#C85A2A" }}
             >
               Everything You Need
             </span>
             <h2
               className="font-serif font-bold"
-              style={{ fontSize: "clamp(2rem, 4vw, 3rem)", color: "#5C1F1F" }}
+              style={{ fontSize: "clamp(1.875rem, 4vw, 2.75rem)", color: "#5C1F1F" }}
             >
               Built for real results
             </h2>
           </FadeIn>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {features.map((f, i) => (
               <FadeIn key={f.title} delay={i * 0.08} direction="up">
                 <motion.div
                   whileHover={{ y: -6, boxShadow: "0 20px 50px rgba(92,31,31,0.12)" }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className="rounded-2xl p-7 cursor-default group"
+                  className="rounded-2xl p-6 cursor-default group"
                   style={{
                     background: "#FFFFFF",
                     border: "1px solid rgba(92,31,31,0.06)",
@@ -742,7 +732,7 @@ export default function LandingPage() {
                   }}
                 >
                   <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-all group-hover:scale-110"
+                    className="w-11 h-11 rounded-xl flex items-center justify-center mb-5 transition-all group-hover:scale-110"
                     style={{
                       background: i % 2 === 0 ? "rgba(232,168,56,0.12)" : "rgba(200,90,42,0.1)",
                     }}
@@ -753,12 +743,12 @@ export default function LandingPage() {
                     />
                   </div>
                   <h3
-                    className="font-serif font-bold text-lg mb-3"
+                    className="font-serif font-bold text-base mb-2.5"
                     style={{ color: "#5C1F1F" }}
                   >
                     {f.title}
                   </h3>
-                  <p className="text-sm leading-relaxed" style={{ color: "#9B7B6B" }}>
+                  <p className="text-[0.8125rem] leading-[1.7]" style={{ color: "#9B7B6B" }}>
                     {f.description}
                   </p>
                 </motion.div>
@@ -769,25 +759,25 @@ export default function LandingPage() {
       </section>
 
       {/* ── Expert Counselors ──────────────────────────────────────────────── */}
-      <section id="counselors" className="py-28 px-6 relative overflow-hidden">
+      <section id="counselors" className="py-32 px-6 relative overflow-hidden">
         <div className="max-w-5xl mx-auto">
-          <FadeIn direction="up" className="text-center mb-16">
+          <FadeIn direction="up" className="text-center mb-20">
             <span
-              className="inline-block text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-5"
+              className="inline-block text-[0.6875rem] font-bold uppercase tracking-[0.1em] px-4 py-2 rounded-full mb-5"
               style={{ background: "rgba(232,168,56,0.12)", color: "#C85A2A" }}
             >
               Meet Our Experts
             </span>
             <h2
-              className="font-serif font-bold mb-4"
-              style={{ fontSize: "clamp(2rem, 4vw, 3rem)", color: "#5C1F1F" }}
+              className="font-serif font-bold mb-5"
+              style={{ fontSize: "clamp(1.875rem, 4vw, 2.75rem)", color: "#5C1F1F" }}
             >
               Counselors who{" "}
               <em style={{ color: "#E8A838" }}>know the SAT</em>
             </h2>
-            <p className="max-w-lg mx-auto text-base" style={{ color: "#9B7B6B" }}>
+            <p className="max-w-lg mx-auto text-[0.9375rem] leading-[1.7]" style={{ color: "#9B7B6B" }}>
               Every ERDEM+ counselor has deep expertise in their section — not generalists, but
-              specialists who've helped thousands of students break through.
+              specialists who&apos;ve helped thousands of students break through.
             </p>
           </FadeIn>
 
@@ -838,7 +828,7 @@ export default function LandingPage() {
                         {c.sessions} students coached
                       </span>
                     </div>
-                    <p className="text-sm leading-relaxed text-center" style={{ color: "#9B7B6B" }}>
+                    <p className="text-[0.8125rem] leading-[1.7] text-center" style={{ color: "#9B7B6B" }}>
                       {c.bio}
                     </p>
                   </div>
@@ -852,32 +842,32 @@ export default function LandingPage() {
       {/* ── Testimonials ───────────────────────────────────────────────────── */}
       <section
         id="testimonials"
-        className="py-28 px-6 relative overflow-hidden"
+        className="py-32 px-6 relative overflow-hidden"
         style={{ background: "#FFFDF8" }}
       >
         <div className="max-w-5xl mx-auto">
-          <FadeIn direction="up" className="text-center mb-16">
+          <FadeIn direction="up" className="text-center mb-20">
             <span
-              className="inline-block text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-5"
+              className="inline-block text-[0.6875rem] font-bold uppercase tracking-[0.1em] px-4 py-2 rounded-full mb-5"
               style={{ background: "rgba(200,90,42,0.1)", color: "#C85A2A" }}
             >
               Student Stories
             </span>
             <h2
               className="font-serif font-bold"
-              style={{ fontSize: "clamp(2rem, 4vw, 3rem)", color: "#5C1F1F" }}
+              style={{ fontSize: "clamp(1.875rem, 4vw, 2.75rem)", color: "#5C1F1F" }}
             >
               Real scores. Real students.
             </h2>
           </FadeIn>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-6">
             {testimonials.map((t, i) => (
               <FadeIn key={t.name} delay={i * 0.12} direction="up">
                 <motion.div
                   whileHover={{ y: -6 }}
                   transition={{ type: "spring", stiffness: 280, damping: 18 }}
-                  className="rounded-3xl p-7 flex flex-col gap-5 h-full"
+                  className="rounded-3xl p-6 flex flex-col gap-5 h-full"
                   style={{
                     background: "#FFFFFF",
                     boxShadow: "0 4px 24px rgba(92,31,31,0.07)",
@@ -905,8 +895,8 @@ export default function LandingPage() {
                   </div>
 
                   {/* Quote */}
-                  <p className="text-sm leading-relaxed flex-1" style={{ color: "#6B5B5B" }}>
-                    "{t.text}"
+                  <p className="text-[0.8125rem] leading-[1.75] flex-1" style={{ color: "#6B5B5B" }}>
+                    &ldquo;{t.text}&rdquo;
                   </p>
 
                   {/* Author */}
@@ -940,7 +930,7 @@ export default function LandingPage() {
       <section
         id="join-the-waitlist"
         ref={waitlistRef as React.RefObject<HTMLElement>}
-        className="py-28 px-6 relative overflow-hidden"
+        className="py-32 px-6 relative overflow-hidden"
         style={{ background: "#5C1F1F" }}
       >
         {/* Warm texture */}
@@ -966,7 +956,7 @@ export default function LandingPage() {
         <div className="max-w-2xl mx-auto relative z-10 text-center">
           <FadeIn direction="up">
             <div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 text-xs font-bold uppercase tracking-widest"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 text-[0.6875rem] font-bold uppercase tracking-[0.1em]"
               style={{ background: "rgba(232,168,56,0.15)", color: "#E8A838" }}
             >
               <Sparkles size={12} />
@@ -974,14 +964,14 @@ export default function LandingPage() {
             </div>
 
             <h2
-              className="font-serif font-bold mb-5 leading-tight"
-              style={{ fontSize: "clamp(2.2rem, 5vw, 3.4rem)", color: "#FAF6EE" }}
+              className="font-serif font-bold mb-6 leading-tight"
+              style={{ fontSize: "clamp(2rem, 4.5vw, 3rem)", color: "#FAF6EE" }}
             >
               Be the first to transform
               <br />
               <span style={{ color: "#E8A838" }}>your SAT score.</span>
             </h2>
-            <p className="text-base leading-relaxed mb-4" style={{ color: "rgba(250,246,238,0.65)" }}>
+            <p className="text-[0.9375rem] leading-[1.7] mb-4" style={{ color: "rgba(250,246,238,0.6)" }}>
               Get priority access to ERDEM+, exclusive launch pricing, and a free introductory
               counseling session when we launch.
             </p>
@@ -1119,11 +1109,11 @@ export default function LandingPage() {
 
       {/* ── Footer ─────────────────────────────────────────────────────────── */}
       <footer
-        className="py-14 px-6"
+        className="py-16 px-6"
         style={{ background: "#3D1010", borderTop: "1px solid rgba(232,168,56,0.08)" }}
       >
         <div className="max-w-5xl mx-auto">
-          <div className="flex flex-col md:flex-row items-start justify-between gap-12 mb-12">
+          <div className="flex flex-col md:flex-row items-start justify-between gap-14 mb-14">
             {/* Brand */}
             <div className="max-w-xs">
               <Logo size={40} />
