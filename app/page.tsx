@@ -300,7 +300,7 @@ export default function LandingPage() {
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="fixed top-0 left-0 right-0 z-50 px-6 py-5"
+        className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 py-3.5 sm:py-5"
         style={{
           background: "rgba(250, 246, 238, 0.88)",
           backdropFilter: "blur(14px)",
@@ -308,7 +308,7 @@ export default function LandingPage() {
         }}
       >
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <Logo size={36} registerRef />
+          <Logo size={32} registerRef />
           <div className="hidden md:flex items-center gap-10">
             {["How It Works", "Features", "Counselors", "Testimonials"].map((item) => (
               <a
@@ -325,7 +325,7 @@ export default function LandingPage() {
           </div>
           <button
             onClick={scrollToWaitlist}
-            className="text-[0.8125rem] font-semibold px-6 py-2.5 rounded-full transition-all"
+            className="text-xs sm:text-[0.8125rem] font-semibold px-4 sm:px-6 py-2 sm:py-2.5 rounded-full transition-all"
             style={{
               background: "#5C1F1F",
               color: "#FAF6EE",
@@ -342,7 +342,7 @@ export default function LandingPage() {
       <section
         id="hero"
         ref={heroRef}
-        className="relative min-h-screen flex items-center pt-24 pb-20 overflow-hidden"
+        className="relative min-h-[100svh] flex items-center pt-28 sm:pt-24 pb-12 sm:pb-20 overflow-hidden"
       >
         {/* Decorative puzzle pieces */}
         <motion.div
@@ -364,15 +364,15 @@ export default function LandingPage() {
           <PuzzlePiece color="#E8A838" size={60} opacity={0.1} rotate={30} />
         </motion.div>
 
-        <motion.div style={{ opacity: heroOpacity }} className="max-w-6xl mx-auto px-6 w-full">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <motion.div style={{ opacity: heroOpacity }} className="max-w-6xl mx-auto px-5 sm:px-6 w-full">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             {/* Left: copy */}
             <div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-7 text-xs font-semibold tracking-wide"
+                className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-5 sm:mb-7 text-[0.6875rem] sm:text-xs font-semibold tracking-wide"
                 style={{
                   background: "rgba(232, 168, 56, 0.15)",
                   color: "#C85A2A",
@@ -387,8 +387,8 @@ export default function LandingPage() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.2, ease: [0.21, 0.47, 0.32, 0.98] }}
-                className="font-serif font-bold leading-[1.08] tracking-tight mb-7"
-                style={{ fontSize: "clamp(2.4rem, 5.5vw, 3.8rem)", color: "#5C1F1F" }}
+                className="font-serif font-bold leading-[1.1] sm:leading-[1.08] tracking-tight mb-5 sm:mb-7"
+                style={{ fontSize: "clamp(2rem, 7vw, 3.8rem)", color: "#5C1F1F" }}
               >
                 Master the SAT.{" "}
                 <span
@@ -407,7 +407,7 @@ export default function LandingPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.35 }}
-                className="text-[1.0625rem] leading-[1.7] mb-10 max-w-lg"
+                className="text-[0.9375rem] sm:text-[1.0625rem] leading-[1.65] sm:leading-[1.7] mb-8 sm:mb-10 max-w-lg"
                 style={{ color: "#9B7B6B" }}
               >
                 ERDEM PLUS combines intelligent self-paced learning with real 1-on-1 expert counseling
@@ -424,7 +424,7 @@ export default function LandingPage() {
                   onClick={scrollToWaitlist}
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.97 }}
-                  className="group flex items-center gap-2.5 px-7 py-4 rounded-full font-semibold text-[0.9375rem] shadow-lg transition-all"
+                  className="group flex items-center gap-2.5 px-6 sm:px-7 py-3.5 sm:py-4 rounded-full font-semibold text-sm sm:text-[0.9375rem] shadow-lg transition-all"
                   style={{
                     background: "linear-gradient(135deg, #C85A2A, #A0451F)",
                     color: "#FAF6EE",
@@ -586,8 +586,8 @@ export default function LandingPage() {
           className="absolute inset-0 puzzle-bg opacity-20 pointer-events-none"
           style={{ filter: "invert(1) brightness(0.3)" }}
         />
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
+        <div className="max-w-5xl mx-auto px-5 sm:px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-10">
             {stats.map((s, i) => (
               <FadeIn key={s.label} delay={i * 0.1} direction="up">
                 <div className="text-center">
@@ -965,7 +965,7 @@ export default function LandingPage() {
 
             <h2
               className="font-serif font-bold mb-6 leading-tight"
-              style={{ fontSize: "clamp(2rem, 4.5vw, 3rem)", color: "#FAF6EE" }}
+              style={{ fontSize: "clamp(1.75rem, 6vw, 3rem)", color: "#FAF6EE" }}
             >
               Be the first to transform
               <br />
