@@ -150,7 +150,7 @@ function StarRating({ rating }: { rating: number }) {
       {[1, 2, 3, 4, 5].map((i) => (
         <Star
           key={i}
-          size={14}
+          size={16}
           className={i <= rating ? "fill-current" : ""}
           style={{ color: i <= rating ? "#E8A838" : "#D4B896" }}
         />
@@ -308,13 +308,13 @@ export default function LandingPage() {
         }}
       >
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <Logo size={32} registerRef />
+          <Logo size={44} registerRef />
           <div className="hidden md:flex items-center gap-10">
             {["How It Works", "Features", "Counselors", "Testimonials"].map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
-                className="text-[0.8125rem] font-medium tracking-wide transition-colors"
+                className="text-sm font-medium tracking-wide transition-colors"
                 style={{ color: "#9B7B6B" }}
                 onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "#5C1F1F")}
                 onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "#9B7B6B")}
@@ -325,7 +325,7 @@ export default function LandingPage() {
           </div>
           <button
             onClick={scrollToWaitlist}
-            className="text-xs sm:text-[0.8125rem] font-semibold px-4 sm:px-6 py-2 sm:py-2.5 rounded-full transition-all"
+            className="text-sm font-semibold px-4 sm:px-6 py-2 sm:py-2.5 rounded-full transition-all"
             style={{
               background: "#5C1F1F",
               color: "#FAF6EE",
@@ -372,7 +372,7 @@ export default function LandingPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-5 sm:mb-7 text-[0.6875rem] sm:text-xs font-semibold tracking-wide"
+                className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-5 sm:mb-7 text-xs sm:text-sm font-semibold tracking-wide"
                 style={{
                   background: "rgba(232, 168, 56, 0.15)",
                   color: "#C85A2A",
@@ -407,7 +407,7 @@ export default function LandingPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.35 }}
-                className="text-[0.9375rem] sm:text-[1.0625rem] leading-[1.65] sm:leading-[1.7] mb-8 sm:mb-10 max-w-lg"
+                className="text-base sm:text-lg leading-[1.65] sm:leading-[1.7] mb-8 sm:mb-10 max-w-lg"
                 style={{ color: "#9B7B6B" }}
               >
                 ERDEM PLUS combines intelligent self-paced learning with real 1-on-1 expert counseling
@@ -424,7 +424,7 @@ export default function LandingPage() {
                   onClick={scrollToWaitlist}
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.97 }}
-                  className="group flex items-center gap-2.5 px-6 sm:px-7 py-3.5 sm:py-4 rounded-full font-semibold text-sm sm:text-[0.9375rem] shadow-lg transition-all"
+                  className="group flex items-center gap-2.5 px-6 sm:px-7 py-3.5 sm:py-4 rounded-full font-semibold text-base shadow-lg transition-all"
                   style={{
                     background: "linear-gradient(135deg, #C85A2A, #A0451F)",
                     color: "#FAF6EE",
@@ -455,10 +455,10 @@ export default function LandingPage() {
                 {/* Card header */}
                 <div className="flex items-center justify-between mb-5">
                   <div>
-                    <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] mb-1" style={{ color: "#9B7B6B" }}>
+                    <p className="text-xs font-semibold uppercase tracking-[0.08em] mb-1" style={{ color: "#9B7B6B" }}>
                       Your Progress
                     </p>
-                    <p className="font-serif font-bold text-lg" style={{ color: "#5C1F1F" }}>
+                    <p className="font-serif font-bold text-xl" style={{ color: "#5C1F1F" }}>
                       Score Trajectory
                     </p>
                   </div>
@@ -491,7 +491,7 @@ export default function LandingPage() {
                   ))}
                 </div>
 
-                <div className="flex justify-between text-xs mb-8" style={{ color: "#9B7B6B" }}>
+                <div className="flex justify-between text-sm mb-8" style={{ color: "#9B7B6B" }}>
                   <span>Week 1</span>
                   <span>Week 8</span>
                 </div>
@@ -512,7 +512,7 @@ export default function LandingPage() {
                         border: s.accent ? "1px solid rgba(232,168,56,0.3)" : "1px solid rgba(92,31,31,0.06)",
                       }}
                     >
-                      <p className="text-xs mb-1" style={{ color: "#9B7B6B" }}>
+                      <p className="text-sm mb-1" style={{ color: "#9B7B6B" }}>
                         {s.label}
                       </p>
                       <p
@@ -521,7 +521,7 @@ export default function LandingPage() {
                       >
                         {s.value}
                       </p>
-                      <p className="text-xs font-semibold mt-0.5" style={{ color: s.accent ? "#E8A838" : "#9B7B6B" }}>
+                      <p className="text-sm font-semibold mt-0.5" style={{ color: s.accent ? "#E8A838" : "#9B7B6B" }}>
                         {s.sub}
                       </p>
                     </div>
@@ -540,10 +540,10 @@ export default function LandingPage() {
                     LM
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs font-semibold" style={{ color: "#5C1F1F" }}>
+                    <p className="text-sm font-semibold" style={{ color: "#5C1F1F" }}>
                       Dr. Layla Moreno
                     </p>
-                    <p className="text-xs truncate" style={{ color: "#9B7B6B" }}>
+                    <p className="text-sm truncate" style={{ color: "#9B7B6B" }}>
                       Next session · Tomorrow, 4 PM
                     </p>
                   </div>
@@ -566,7 +566,7 @@ export default function LandingPage() {
                   color: "#FAF6EE",
                 }}
               >
-                <p className="text-xs font-semibold opacity-70 mb-0.5">Target Score</p>
+                <p className="text-sm font-semibold opacity-70 mb-0.5">Target Score</p>
                 <p className="font-serif font-bold text-xl">1520</p>
               </motion.div>
             </motion.div>
@@ -600,7 +600,7 @@ export default function LandingPage() {
                   <p className="font-serif font-bold text-3xl mb-1.5" style={{ color: "#FAF6EE" }}>
                     <AnimatedCounter target={s.value} suffix={s.suffix} />
                   </p>
-                  <p className="text-[0.8125rem] leading-snug" style={{ color: "rgba(250,246,238,0.5)" }}>
+                  <p className="text-sm leading-snug" style={{ color: "rgba(250,246,238,0.5)" }}>
                     {s.label}
                   </p>
                 </div>
@@ -618,7 +618,7 @@ export default function LandingPage() {
         <div className="max-w-5xl mx-auto">
           <FadeIn direction="up" className="text-center mb-4">
             <span
-              className="inline-block text-[0.6875rem] font-bold uppercase tracking-[0.1em] px-4 py-2 rounded-full mb-5"
+              className="inline-block text-xs font-bold uppercase tracking-[0.1em] px-4 py-2 rounded-full mb-5"
               style={{ background: "rgba(232,168,56,0.12)", color: "#C85A2A" }}
             >
               The Process
@@ -632,7 +632,7 @@ export default function LandingPage() {
               Three steps to your{" "}
               <em style={{ color: "#C85A2A" }}>best score</em>
             </h2>
-            <p className="max-w-xl mx-auto text-[0.9375rem] leading-[1.75]" style={{ color: "#9B7B6B" }}>
+            <p className="max-w-xl mx-auto text-base leading-[1.75]" style={{ color: "#9B7B6B" }}>
               ERDEM+ turns a complex journey into a clear, structured path — with technology that adapts
               and humans who care.
             </p>
@@ -673,12 +673,12 @@ export default function LandingPage() {
                       </div>
                     </div>
                     <h3
-                      className="font-serif font-bold text-lg mb-3"
+                      className="font-serif font-bold text-xl mb-3"
                       style={{ color: "#5C1F1F" }}
                     >
                       {step.title}
                     </h3>
-                    <p className="text-[0.8125rem] leading-[1.7]" style={{ color: "#9B7B6B" }}>
+                    <p className="text-[0.9375rem] leading-[1.7]" style={{ color: "#9B7B6B" }}>
                       {step.description}
                     </p>
                   </div>
@@ -705,7 +705,7 @@ export default function LandingPage() {
         <div className="max-w-5xl mx-auto">
           <FadeIn direction="up" className="text-center mb-20">
             <span
-              className="inline-block text-[0.6875rem] font-bold uppercase tracking-[0.1em] px-4 py-2 rounded-full mb-5"
+              className="inline-block text-xs font-bold uppercase tracking-[0.1em] px-4 py-2 rounded-full mb-5"
               style={{ background: "rgba(200,90,42,0.1)", color: "#C85A2A" }}
             >
               Everything You Need
@@ -743,12 +743,12 @@ export default function LandingPage() {
                     />
                   </div>
                   <h3
-                    className="font-serif font-bold text-base mb-2.5"
+                    className="font-serif font-bold text-lg mb-2.5"
                     style={{ color: "#5C1F1F" }}
                   >
                     {f.title}
                   </h3>
-                  <p className="text-[0.8125rem] leading-[1.7]" style={{ color: "#9B7B6B" }}>
+                  <p className="text-[0.9375rem] leading-[1.7]" style={{ color: "#9B7B6B" }}>
                     {f.description}
                   </p>
                 </motion.div>
@@ -763,7 +763,7 @@ export default function LandingPage() {
         <div className="max-w-5xl mx-auto">
           <FadeIn direction="up" className="text-center mb-20">
             <span
-              className="inline-block text-[0.6875rem] font-bold uppercase tracking-[0.1em] px-4 py-2 rounded-full mb-5"
+              className="inline-block text-xs font-bold uppercase tracking-[0.1em] px-4 py-2 rounded-full mb-5"
               style={{ background: "rgba(232,168,56,0.12)", color: "#C85A2A" }}
             >
               Meet Our Experts
@@ -775,7 +775,7 @@ export default function LandingPage() {
               Counselors who{" "}
               <em style={{ color: "#E8A838" }}>know the SAT</em>
             </h2>
-            <p className="max-w-lg mx-auto text-[0.9375rem] leading-[1.7]" style={{ color: "#9B7B6B" }}>
+            <p className="max-w-lg mx-auto text-base leading-[1.7]" style={{ color: "#9B7B6B" }}>
               Every ERDEM+ counselor has deep expertise in their section — not generalists, but
               specialists who&apos;ve helped thousands of students break through.
             </p>
@@ -809,7 +809,7 @@ export default function LandingPage() {
                       {c.name}
                     </h3>
                     <span
-                      className="text-xs font-semibold px-4 py-2 rounded-full"
+                      className="text-sm font-semibold px-4 py-2 rounded-full"
                       style={{
                         background: "rgba(255,255,255,0.85)",
                         color: c.specialtyColor,
@@ -828,7 +828,7 @@ export default function LandingPage() {
                         {c.sessions} students coached
                       </span>
                     </div>
-                    <p className="text-[0.8125rem] leading-[1.7] text-center" style={{ color: "#9B7B6B" }}>
+                    <p className="text-[0.9375rem] leading-[1.7] text-center" style={{ color: "#9B7B6B" }}>
                       {c.bio}
                     </p>
                   </div>
@@ -848,7 +848,7 @@ export default function LandingPage() {
         <div className="max-w-5xl mx-auto">
           <FadeIn direction="up" className="text-center mb-20">
             <span
-              className="inline-block text-[0.6875rem] font-bold uppercase tracking-[0.1em] px-4 py-2 rounded-full mb-5"
+              className="inline-block text-xs font-bold uppercase tracking-[0.1em] px-4 py-2 rounded-full mb-5"
               style={{ background: "rgba(200,90,42,0.1)", color: "#C85A2A" }}
             >
               Student Stories
@@ -889,13 +889,13 @@ export default function LandingPage() {
                     <span className="font-serif font-bold text-base" style={{ color: t.color }}>
                       {t.after}
                     </span>
-                    <span className="text-xs font-semibold" style={{ color: t.color }}>
+                    <span className="text-sm font-semibold" style={{ color: t.color }}>
                       +{t.after - t.before}
                     </span>
                   </div>
 
                   {/* Quote */}
-                  <p className="text-[0.8125rem] leading-[1.75] flex-1" style={{ color: "#6B5B5B" }}>
+                  <p className="text-[0.9375rem] leading-[1.75] flex-1" style={{ color: "#6B5B5B" }}>
                     &ldquo;{t.text}&rdquo;
                   </p>
 
@@ -911,7 +911,7 @@ export default function LandingPage() {
                       <p className="text-sm font-semibold" style={{ color: "#5C1F1F" }}>
                         {t.name}
                       </p>
-                      <p className="text-xs" style={{ color: "#9B7B6B" }}>
+                      <p className="text-sm" style={{ color: "#9B7B6B" }}>
                         {t.location}
                       </p>
                     </div>
@@ -956,7 +956,7 @@ export default function LandingPage() {
         <div className="max-w-2xl mx-auto relative z-10 text-center">
           <FadeIn direction="up">
             <div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 text-[0.6875rem] font-bold uppercase tracking-[0.1em]"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 text-xs font-bold uppercase tracking-[0.1em]"
               style={{ background: "rgba(232,168,56,0.15)", color: "#E8A838" }}
             >
               <Sparkles size={12} />
@@ -971,14 +971,14 @@ export default function LandingPage() {
               <br />
               <span style={{ color: "#E8A838" }}>your SAT score.</span>
             </h2>
-            <p className="text-[0.9375rem] leading-[1.7] mb-4" style={{ color: "rgba(250,246,238,0.6)" }}>
+            <p className="text-base leading-[1.7] mb-4" style={{ color: "rgba(250,246,238,0.6)" }}>
               Get priority access to ERDEM+, exclusive launch pricing, and a free introductory
               counseling session when we launch.
             </p>
 
             {/* Counter */}
             <div
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-full mb-10 text-sm font-semibold"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-full mb-10 text-base font-semibold"
               style={{ background: "rgba(232,168,56,0.12)", color: "#E8A838", border: "1px solid rgba(232,168,56,0.25)" }}
             >
               <div className="w-2 h-2 rounded-full bg-current animate-pulse" />
@@ -1003,7 +1003,7 @@ export default function LandingPage() {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       required
-                      className="flex-1 px-5 py-4 rounded-xl text-sm font-medium outline-none transition-all"
+                      className="flex-1 px-5 py-4 rounded-xl text-base font-medium outline-none transition-all"
                       style={{
                         background: "rgba(250,246,238,0.1)",
                         border: "1px solid rgba(250,246,238,0.15)",
@@ -1024,7 +1024,7 @@ export default function LandingPage() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
-                      className="flex-1 px-5 py-4 rounded-xl text-sm font-medium outline-none transition-all"
+                      className="flex-1 px-5 py-4 rounded-xl text-base font-medium outline-none transition-all"
                       style={{
                         background: "rgba(250,246,238,0.1)",
                         border: "1px solid rgba(250,246,238,0.15)",
@@ -1070,7 +1070,7 @@ export default function LandingPage() {
                       </>
                     )}
                   </motion.button>
-                  <p className="text-xs" style={{ color: "rgba(250,246,238,0.4)" }}>
+                  <p className="text-sm" style={{ color: "rgba(250,246,238,0.4)" }}>
                     No spam. We&apos;ll notify you at launch with your early access link.
                   </p>
                 </motion.form>
@@ -1095,7 +1095,7 @@ export default function LandingPage() {
                   <h3 className="font-serif font-bold text-2xl mb-3" style={{ color: "#FAF6EE" }}>
                     You&apos;re on the list, {name}!
                   </h3>
-                  <p className="text-sm" style={{ color: "rgba(250,246,238,0.6)" }}>
+                  <p className="text-base" style={{ color: "rgba(250,246,238,0.6)" }}>
                     We&apos;ll reach out to{" "}
                     <strong style={{ color: "#E8A838" }}>{email}</strong> as soon as we launch.
                     Expect early access, exclusive pricing, and a free counseling session.
@@ -1155,7 +1155,7 @@ export default function LandingPage() {
                 },
               ].map((col) => (
                 <div key={col.title}>
-                  <p className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: "rgba(250,246,238,0.3)" }}>
+                  <p className="text-sm font-bold uppercase tracking-widest mb-4" style={{ color: "rgba(250,246,238,0.3)" }}>
                     {col.title}
                   </p>
                   <ul className="space-y-2.5">
@@ -1182,7 +1182,7 @@ export default function LandingPage() {
             className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8"
             style={{ borderTop: "1px solid rgba(250,246,238,0.06)" }}
           >
-            <p className="text-xs" style={{ color: "rgba(250,246,238,0.25)" }}>
+            <p className="text-sm" style={{ color: "rgba(250,246,238,0.25)" }}>
               © 2026 ERDEM+. All rights reserved.
             </p>
             <div className="flex gap-6">
@@ -1190,7 +1190,7 @@ export default function LandingPage() {
                 <a
                   key={l}
                   href="#"
-                  className="text-xs transition-colors"
+                  className="text-sm transition-colors"
                   style={{ color: "rgba(250,246,238,0.25)" }}
                   onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "rgba(250,246,238,0.5)")}
                   onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "rgba(250,246,238,0.25)")}
