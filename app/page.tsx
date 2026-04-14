@@ -272,8 +272,10 @@ const testimonials = [
 export default function LandingPage() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [joining, setJoining] = useState(false);
+  const [waitlistError, setWaitlistError] = useState<string | null>(null);
   const waitlistRef = useRef<HTMLElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef });
@@ -286,11 +288,30 @@ export default function LandingPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!email || !name) return;
+    if (!email || !name || !phone) return;
     setJoining(true);
-    await new Promise((r) => setTimeout(r, 1200));
-    setJoining(false);
-    setSubmitted(true);
+    setWaitlistError(null);
+    try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3000";
+      const res = await fetch(`${apiUrl}/api/shared/waitlist`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, phone }),
+      });
+      if (res.status === 409) {
+        setWaitlistError("This email is already on the waitlist.");
+        return;
+      }
+      if (!res.ok) {
+        setWaitlistError("Something went wrong. Please try again.");
+        return;
+      }
+      setSubmitted(true);
+    } catch {
+      setWaitlistError("Something went wrong. Please try again.");
+    } finally {
+      setJoining(false);
+    }
   }
 
   return (
@@ -1040,6 +1061,27 @@ export default function LandingPage() {
                       }}
                     />
                   </div>
+                  <input
+                    type="tel"
+                    placeholder="Phone number"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    required
+                    className="w-full px-5 py-4 rounded-xl text-base font-medium outline-none transition-all"
+                    style={{
+                      background: "rgba(250,246,238,0.1)",
+                      border: "1px solid rgba(250,246,238,0.15)",
+                      color: "#FAF6EE",
+                    }}
+                    onFocus={(e) => {
+                      (e.target as HTMLInputElement).style.borderColor = "#E8A838";
+                      (e.target as HTMLInputElement).style.background = "rgba(250,246,238,0.12)";
+                    }}
+                    onBlur={(e) => {
+                      (e.target as HTMLInputElement).style.borderColor = "rgba(250,246,238,0.15)";
+                      (e.target as HTMLInputElement).style.background = "rgba(250,246,238,0.1)";
+                    }}
+                  />
                   <motion.button
                     type="submit"
                     disabled={joining}
@@ -1070,6 +1112,11 @@ export default function LandingPage() {
                       </>
                     )}
                   </motion.button>
+                  {waitlistError && (
+                    <p className="text-sm font-medium" style={{ color: "#E8A838" }}>
+                      {waitlistError}
+                    </p>
+                  )}
                   <p className="text-sm" style={{ color: "rgba(250,246,238,0.4)" }}>
                     No spam. We&apos;ll notify you at launch with your early access link.
                   </p>
