@@ -52,7 +52,7 @@ function ProgressBar({ startDelay, hide }: { startDelay: number; hide: boolean }
 
 // ─── Splash ───────────────────────────────────────────────────────────────────
 
-export default function SplashScreen() {
+export default function SplashScreen({ tagline }: { tagline?: string }) {
   const [phase, setPhase] = useState<'pending' | 'assembling' | 'flying' | 'done'>('pending');
   const logoRef = useRef<HTMLDivElement>(null);
   const [flyTarget, setFlyTarget] = useState({ x: 0, y: 0, scale: 1 });
@@ -257,7 +257,7 @@ export default function SplashScreen() {
               color: '#5C1F1F', userSelect: 'none',
             }}
           >
-            Master the SAT
+            {tagline ?? 'Master the SAT'}
           </motion.p>
         </motion.div>
       </div>

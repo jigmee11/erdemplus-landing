@@ -1,0 +1,157 @@
+{
+  "splashTagline": "Master the SAT",
+  "nav": {
+    "howItWorks": "How It Works",
+    "features": "Features",
+    "counselors": "Counselors",
+    "testimonials": "Testimonials",
+    "joinWaitlist": "Join Waitlist"
+  },
+  "hero": {
+    "badge": "Now accepting waitlist — limited spots",
+    "title": "Master the SAT.",
+    "titleAccent": "On Your Terms.",
+    "description": "ERDEM PLUS combines intelligent self-paced learning with real 1-on-1 expert counseling — so you get the flexibility of an app and the results of a private tutor.",
+    "cta": "Join the Waitlist"
+  },
+  "heroCard": {
+    "yourProgress": "Your Progress",
+    "scoreTrajectory": "Score Trajectory",
+    "week1": "Week 1",
+    "week8": "Week 8",
+    "startScore": "Start Score",
+    "baseline": "Baseline",
+    "current": "Current",
+    "nextSession": "Next session · Tomorrow, 4 PM",
+    "targetScore": "Target Score",
+    "counselorName": "Dr. Layla Moreno"
+  },
+  "stats": {
+    "labels": [
+      "Students' Data Analyzed",
+      "Students Personally Coached",
+      "Avg Score Improvement",
+      "Satisfaction Rate"
+    ]
+  },
+  "howItWorks": {
+    "badge": "The Process",
+    "title": "Three steps to your",
+    "titleAccent": "best score",
+    "subtitle": "ERDEM+ turns a complex journey into a clear, structured path — with technology that adapts and humans who care.",
+    "steps": [
+      {
+        "title": "Study at Your Pace",
+        "description": "Access adaptive video lessons and reading materials designed to meet you exactly where you are. Learn anytime, anywhere."
+      },
+      {
+        "title": "Practice & Improve",
+        "description": "Take full-length adaptive practice tests that pinpoint your weaknesses. Our AI engine adjusts difficulty in real time."
+      },
+      {
+        "title": "Get Expert Coached",
+        "description": "Book 1-on-1 live sessions with top counselors. Get personalized strategy, test-taking techniques, and accountability."
+      }
+    ]
+  },
+  "features": {
+    "badge": "Everything You Need",
+    "title": "Built for real results",
+    "items": [
+      {
+        "title": "Adaptive Practice Tests",
+        "description": "Full-length SAT simulations that adjust to your skill level, targeting the exact areas you need most."
+      },
+      {
+        "title": "AI Progress Tracking",
+        "description": "Intelligent analytics that map your learning curve, predict your score, and surface your next best study action."
+      },
+      {
+        "title": "1-on-1 Live Counseling",
+        "description": "Direct sessions with certified counselors who know the SAT inside out — your questions, answered live."
+      },
+      {
+        "title": "Personalized Study Plans",
+        "description": "AI-generated weekly study plans tailored to your test date, target score, and current performance."
+      },
+      {
+        "title": "Score Analytics Dashboard",
+        "description": "A beautiful, clear view of your progress across all SAT domains — know exactly where you stand."
+      }
+    ]
+  },
+  "counselors": {
+    "badge": "Meet Our Experts",
+    "title": "Counselors who",
+    "titleAccent": "know the SAT",
+    "subtitle": "Every ERDEM+ counselor has deep expertise in their section — not generalists, but specialists who've helped thousands of students break through.",
+    "studentsCoached": "students coached",
+    "items": [
+      {
+        "name": "Ylalt Naranbaatar",
+        "specialty": "SAT Expert Counselor",
+        "sessions": "100+",
+        "bio": "ERDEM+'s lead counselor. Has personally guided 100+ students to their target scores through tailored strategy, deep diagnostic work, and relentless support."
+      }
+    ]
+  },
+  "testimonials": {
+    "badge": "Student Stories",
+    "title": "Real scores. Real students.",
+    "items": [
+      {
+        "name": "Aiden Park",
+        "location": "Los Angeles, CA",
+        "text": "I had tried three other prep courses and never broke 1100. ERDEM+ was completely different — the AI actually found the gaps in my reasoning, not just my wrong answers. My counselor, Dr. Moreno, changed how I think about math."
+      },
+      {
+        "name": "Sofia Reyes",
+        "location": "Miami, FL",
+        "text": "The 1-on-1 sessions were worth every penny. James helped me go from dreading the reading section to actually enjoying it. Having a real expert who knows my exact weak spots is something no app can replace."
+      },
+      {
+        "name": "Marcus Chen",
+        "location": "Austin, TX",
+        "text": "The adaptive tests are eerily accurate — within two weeks they already knew I struggled with paired passages more than vocabulary. Scored a 1510 on test day, 390 points above where I started. Genuinely life-changing."
+      }
+    ]
+  },
+  "waitlist": {
+    "badge": "Limited Early Access",
+    "title": "Be the first to transform",
+    "titleAccent": "your SAT score.",
+    "subtitle": "Get priority access to ERDEM+, exclusive launch pricing, and a free introductory counseling session when we launch.",
+    "counter": "142 students already joined · 58 spots remaining",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "your@email.com",
+    "phonePlaceholder": "Phone number",
+    "submit": "Join the Waitlist",
+    "joining": "Joining...",
+    "noSpam": "No spam. We'll notify you at launch with your early access link.",
+    "errorDuplicate": "This email is already on the waitlist.",
+    "errorGeneric": "Something went wrong. Please try again.",
+    "successTitle": "You're on the list, {name}!",
+    "successBody": "We'll reach out to {email} as soon as we launch. Expect early access, exclusive pricing, and a free counseling session."
+  },
+  "footer": {
+    "brand": {
+      "description": "The SAT learning platform that pairs intelligent technology with human expertise."
+    },
+    "columns": [
+      {
+        "title": "Product",
+        "links": ["How It Works", "Features", "Pricing", "Reviews"]
+      },
+      {
+        "title": "Counseling",
+        "links": ["Meet Counselors", "Book a Session", "Specialties", "Group Sessions"]
+      },
+      {
+        "title": "Company",
+        "links": ["About", "Blog", "Careers", "Contact"]
+      }
+    ],
+    "copyright": "© 2026 ERDEM+. All rights reserved.",
+    "legal": ["Privacy Policy", "Terms of Service", "Cookie Policy"]
+  }
+}

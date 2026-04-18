@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Playfair_Display, DM_Sans } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import SplashScreen from "@/components/SplashScreen";
+import { getDictionary, hasLocale } from "./dictionaries";
+import { notFound } from "next/navigation";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -18,21 +20,31 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   title: "ERDEM+",
-  description: "Self-paced SAT learning platform with 1-on-1 expert counseling. Adaptive practice, video lessons, and personalized study plans.",
+  description:
+    "Self-paced SAT learning platform with 1-on-1 expert counseling. Adaptive practice, video lessons, and personalized study plans.",
 };
 
-export default function RootLayout({
+export async function generateStaticParams() {
+  return [{ lang: "mn" }, { lang: "en" }];
+}
+
+export default async function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+  params,
+}: LayoutProps<"/[lang]">) {
+  const { lang } = await params;
+
+  if (!hasLocale(lang)) notFound();
+
+  const dict = await getDictionary(lang);
+
   return (
     <html
-      lang="en"
+      lang={lang}
       className={`${playfair.variable} ${dmSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <SplashScreen />
+        <SplashScreen tagline={dict.splashTagline} />
         {children}
       </body>
     </html>
