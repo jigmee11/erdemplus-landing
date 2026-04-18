@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import logoImg from "@/app/assets/logo.svg";
+import ylaltImg from "@/app/assets/ylalt_naranbaatar.png";
 import { navLogoRef } from "@/components/navLogoRef";
 import { useState, useRef, useEffect } from "react";
 import {
@@ -247,6 +248,7 @@ const COUNSELOR_META = [
     specialtyColor: "#C85A2A",
     rating: 5,
     initials: "YN",
+    photo: ylaltImg,
     bg: "#F5D8CC",
     featured: true,
   },
@@ -884,14 +886,26 @@ export default function LandingPage({
                       className="relative flex flex-col items-center pt-12 pb-8 px-8"
                       style={{ background: meta.bg }}
                     >
-                      <div
-                        className="w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold mb-4 ring-4 ring-white shadow-xl"
-                        style={{
-                          background: meta.specialtyColor,
-                          color: "#FAF6EE",
-                        }}
-                      >
-                        {meta.initials}
+                      <div className="w-28 h-28 rounded-full overflow-hidden mb-4 ring-4 ring-white shadow-xl">
+                        {meta.photo ? (
+                          <Image
+                            src={meta.photo}
+                            alt={c.name}
+                            width={112}
+                            height={112}
+                            className="w-full h-full object-cover object-top"
+                          />
+                        ) : (
+                          <div
+                            className="w-full h-full flex items-center justify-center text-3xl font-bold"
+                            style={{
+                              background: meta.specialtyColor,
+                              color: "#FAF6EE",
+                            }}
+                          >
+                            {meta.initials}
+                          </div>
+                        )}
                       </div>
                       <h3
                         className="font-serif font-bold text-2xl text-center mb-2"
