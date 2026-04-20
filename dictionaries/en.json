@@ -5,14 +5,15 @@
     "features": "Features",
     "counselors": "Counselors",
     "testimonials": "Testimonials",
-    "joinWaitlist": "Join Waitlist"
+    "joinWaitlist": "Join Waitlist",
+    "enroll": "Enroll Now"
   },
   "hero": {
     "badge": "Now accepting waitlist — limited spots",
     "title": "Master the SAT.",
     "titleAccent": "On Your Terms.",
     "description": "ERDEM PLUS combines intelligent self-paced learning with real 1-on-1 expert counseling — so you get the flexibility of an app and the results of a private tutor.",
-    "cta": "Join the Waitlist"
+    "cta": "Apply Now"
   },
   "heroCard": {
     "yourProgress": "Your Progress",
@@ -132,6 +133,54 @@
     "errorGeneric": "Something went wrong. Please try again.",
     "successTitle": "You're on the list, {name}!",
     "successBody": "We'll reach out to {email} as soon as we launch. Expect early access, exclusive pricing, and a free counseling session."
+  },
+  "enroll": {
+    "badge": "Start Your Journey",
+    "headline": "Apply to ERDEM+",
+    "headlineAccent": "Today.",
+    "subtitle": "Get access to adaptive learning, expert 1-on-1 counseling, and a personalized study plan — built around your goals.",
+    "firstName": "First Name",
+    "firstNamePlaceholder": "First name",
+    "lastName": "Last Name",
+    "lastNamePlaceholder": "Last name",
+    "email": "Email",
+    "emailPlaceholder": "your@email.com",
+    "phone": "Phone",
+    "phonePlaceholder": "Phone number",
+    "programLabel": "Choose Your Program",
+    "satMathTitle": "SAT Math",
+    "satMathSubtitle": "Math section only",
+    "satMathSkills": "19 skills",
+    "satMathSessions": "3–4 sessions / week",
+    "satFullTitle": "SAT Full",
+    "satFullSubtitle": "Math + Reading & Writing",
+    "satFullSkills": "29 skills",
+    "satFullSessions": "6–8 sessions / week",
+    "durationLabel": "Study Duration",
+    "duration14": "14 days",
+    "duration30": "30 days",
+    "duration45": "45 days",
+    "testDateLabel": "SAT Test Date",
+    "testDateOptional": "Optional",
+    "testDateHelper": "Don't know your test date yet? No problem — you can set this later.",
+    "submit": "Submit Application",
+    "submitting": "Submitting...",
+    "successTitle": "Application Submitted!",
+    "successBody": "Thank you, {firstName}! We've received your enrollment request for {program}.",
+    "successBodyEmail": "Our team will review your application and send you an email at {email} with next steps. This usually takes 1–2 business days.",
+    "backToHome": "Back to Home",
+    "errorDuplicate": "An enrollment request with this email is already pending.",
+    "errorGeneric": "Something went wrong. Please try again.",
+    "errorFutureDate": "Test date must be in the future.",
+    "errorRequired": "This field is required.",
+    "errorInvalidEmail": "Please enter a valid email address."
+  },
+  "cta": {
+    "badge": "Ready to Begin?",
+    "title": "Start your SAT",
+    "titleAccent": "journey today.",
+    "subtitle": "Join students who are transforming their SAT scores with personalized learning and expert guidance.",
+    "button": "Apply Now"
   },
   "footer": {
     "brand": {
