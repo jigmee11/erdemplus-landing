@@ -1,16 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import logoImg from "@/app/assets/logo.svg";
 import ylaltImg from "@/app/assets/ylalt_naranbaatar.png";
-import { navLogoRef } from "@/components/navLogoRef";
 import { useState, useRef, useEffect } from "react";
 import {
   motion,
   useInView,
   useScroll,
   useTransform,
-  AnimatePresence,
 } from "framer-motion";
 import {
   BookOpen,
@@ -23,67 +20,16 @@ import {
   ArrowRight,
   CheckCircle,
   ChevronRight,
-  Mail,
-  Globe,
-  Share2,
-  Link,
-  AtSign,
   Sparkles,
   TrendingUp,
   Award,
   Clock,
   BarChart3,
   User,
-  Cross,
 } from "lucide-react";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
+import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
 import type { Dict } from "@/app/[lang]/dictionaries";
-
-// ─── Logo ────────────────────────────────────────────────────────────────────
-function LogoMark({
-  size = 48,
-  registerRef = false,
-}: {
-  size?: number;
-  registerRef?: boolean;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (registerRef) navLogoRef.current = ref.current;
-  }, [registerRef]);
-  return (
-    <div ref={ref} style={{ width: size, height: size }}>
-      <Image
-        src={logoImg}
-        alt="ERDEM+ puzzle logo"
-        width={size}
-        height={size}
-        priority
-      />
-    </div>
-  );
-}
-
-function Logo({
-  size = 48,
-  registerRef = false,
-}: {
-  size?: number;
-  registerRef?: boolean;
-}) {
-  const textSize = size * 0.45;
-  return (
-    <div className="flex items-center gap-1">
-      <LogoMark size={size} registerRef={registerRef} />
-      <span
-        className="font-serif font-bold tracking-tight leading-none"
-        style={{ fontSize: textSize, color: "#5C1F1F" }}
-      >
-        ERDEM<span style={{ color: "#E8A838", fontWeight: "100" }}>✚</span>
-      </span>
-    </div>
-  );
-}
 
 // ─── Puzzle Piece Decorative SVG ────────────────────────────────────────────
 function PuzzlePiece({
@@ -268,113 +214,14 @@ export default function LandingPage({
   dict: Dict;
   lang: string;
 }) {
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const [joining, setJoining] = useState(false);
-  const [waitlistError, setWaitlistError] = useState<string | null>(null);
-  const waitlistRef = useRef<HTMLElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef });
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 120]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
-  const navItems = [
-    { label: dict.nav.howItWorks, href: "#how-it-works" },
-    { label: dict.nav.features, href: "#features" },
-    { label: dict.nav.counselors, href: "#counselors" },
-    // { label: dict.nav.testimonials, href: "#testimonials" },
-  ];
-
-  function scrollToWaitlist() {
-    waitlistRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
-  }
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!email || !name || !phone) return;
-    setJoining(true);
-    setWaitlistError(null);
-    try {
-      const apiUrl =
-        process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3000";
-      const res = await fetch(`${apiUrl}/api/shared/waitlist`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, phone }),
-      });
-      if (res.status === 409) {
-        setWaitlistError(dict.waitlist.errorDuplicate);
-        return;
-      }
-      if (!res.ok) {
-        setWaitlistError(dict.waitlist.errorGeneric);
-        return;
-      }
-      setSubmitted(true);
-    } catch {
-      setWaitlistError(dict.waitlist.errorGeneric);
-    } finally {
-      setJoining(false);
-    }
-  }
-
   return (
     <div className="gradient-mesh min-h-screen overflow-x-hidden">
-      {/* ── Navbar ─────────────────────────────────────────────────────────── */}
-      <motion.nav
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 py-3.5 sm:py-5"
-        style={{
-          background: "rgba(250, 246, 238, 0.88)",
-          backdropFilter: "blur(14px)",
-          borderBottom: "1px solid rgba(232, 168, 56, 0.12)",
-        }}
-      >
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <Logo size={44} registerRef />
-          <div className="hidden md:flex items-center gap-10">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="text-sm font-medium tracking-wide transition-colors"
-                style={{ color: "#9B7B6B" }}
-                onMouseEnter={(e) =>
-                  ((e.target as HTMLElement).style.color = "#5C1F1F")
-                }
-                onMouseLeave={(e) =>
-                  ((e.target as HTMLElement).style.color = "#9B7B6B")
-                }
-              >
-                {item.label}
-              </a>
-            ))}
-          </div>
-          <div className="flex items-center gap-3">
-            <LanguageSwitcher lang={lang} />
-            <button
-              onClick={scrollToWaitlist}
-              className="text-sm font-semibold px-4 sm:px-6 py-2 sm:py-2.5 rounded-full transition-all"
-              style={{
-                background: "#5C1F1F",
-                color: "#FAF6EE",
-              }}
-              onMouseEnter={(e) =>
-                ((e.target as HTMLElement).style.background = "#C85A2A")
-              }
-              onMouseLeave={(e) =>
-                ((e.target as HTMLElement).style.background = "#5C1F1F")
-              }
-            >
-              {dict.nav.joinWaitlist}
-            </button>
-          </div>
-        </div>
-      </motion.nav>
+      <Nav dict={dict} lang={lang} registerLogoRef />
 
       {/* ── Hero ───────────────────────────────────────────────────────────── */}
       <section
@@ -467,8 +314,8 @@ export default function LandingPage({
                 transition={{ duration: 0.5, delay: 0.5 }}
                 className="flex flex-wrap gap-4"
               >
-                <motion.button
-                  onClick={scrollToWaitlist}
+                <motion.a
+                  href={`/${lang}/enroll`}
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.97 }}
                   className="group flex items-center gap-2.5 px-6 sm:px-7 py-3.5 sm:py-4 rounded-full font-semibold text-base shadow-lg transition-all"
@@ -483,7 +330,7 @@ export default function LandingPage({
                     size={16}
                     className="group-hover:translate-x-1 transition-transform"
                   />
-                </motion.button>
+                </motion.a>
               </motion.div>
             </div>
 
@@ -1039,10 +886,9 @@ export default function LandingPage({
         </div>
       </section> */}
 
-      {/* ── Waitlist ───────────────────────────────────────────────────────── */}
+      {/* ── CTA ─────────────────────────────────────────────────────────── */}
       <section
-        id="join-the-waitlist"
-        ref={waitlistRef as React.RefObject<HTMLElement>}
+        id="enroll"
         className="py-32 px-6 relative overflow-hidden"
         style={{ background: "#5C1F1F" }}
       >
@@ -1066,7 +912,6 @@ export default function LandingPage({
             transform: "translate(-30%, 30%)",
           }}
         />
-
         <div className="max-w-2xl mx-auto relative z-10 text-center">
           <FadeIn direction="up">
             <div
@@ -1074,323 +919,41 @@ export default function LandingPage({
               style={{ background: "rgba(232,168,56,0.15)", color: "#E8A838" }}
             >
               <Sparkles size={12} />
-              {dict.waitlist.badge}
+              {dict.cta.badge}
             </div>
-
             <h2
               className="font-serif font-bold mb-6 leading-tight"
-              style={{
-                fontSize: "clamp(1.75rem, 6vw, 3rem)",
-                color: "#FAF6EE",
-              }}
+              style={{ fontSize: "clamp(1.75rem, 6vw, 3rem)", color: "#FAF6EE" }}
             >
-              {dict.waitlist.title}
+              {dict.cta.title}
               <br />
-              <span style={{ color: "#E8A838" }}>{dict.waitlist.titleAccent}</span>
+              <span style={{ color: "#E8A838" }}>{dict.cta.titleAccent}</span>
             </h2>
             <p
-              className="text-base leading-[1.7] mb-4"
+              className="text-base leading-[1.7] mb-10"
               style={{ color: "rgba(250,246,238,0.6)" }}
             >
-              {dict.waitlist.subtitle}
+              {dict.cta.subtitle}
             </p>
-
-            <div
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-full mb-10 text-base font-semibold"
+            <motion.a
+              href={`/${lang}/enroll`}
+              whileHover={{ scale: 1.03, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-semibold text-base transition-all"
               style={{
-                background: "rgba(232,168,56,0.12)",
-                color: "#E8A838",
-                border: "1px solid rgba(232,168,56,0.25)",
+                background: "linear-gradient(135deg, #C85A2A, #A0451F)",
+                color: "#FAF6EE",
+                boxShadow: "0 8px 24px rgba(200, 90, 42, 0.35)",
               }}
             >
-              <div className="w-2 h-2 rounded-full bg-current animate-pulse" />
-              {dict.waitlist.counter}
-            </div>
-          </FadeIn>
-
-          <FadeIn direction="up" delay={0.15}>
-            <AnimatePresence mode="wait">
-              {!submitted ? (
-                <motion.form
-                  key="form"
-                  onSubmit={handleSubmit}
-                  initial={{ opacity: 1 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="space-y-4"
-                >
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    <input
-                      type="text"
-                      placeholder={dict.waitlist.namePlaceholder}
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      required
-                      className="flex-1 px-5 py-4 rounded-xl text-base font-medium outline-none transition-all"
-                      style={{
-                        background: "rgba(250,246,238,0.1)",
-                        border: "1px solid rgba(250,246,238,0.15)",
-                        color: "#FAF6EE",
-                      }}
-                      onFocus={(e) => {
-                        (e.target as HTMLInputElement).style.borderColor =
-                          "#E8A838";
-                        (e.target as HTMLInputElement).style.background =
-                          "rgba(250,246,238,0.12)";
-                      }}
-                      onBlur={(e) => {
-                        (e.target as HTMLInputElement).style.borderColor =
-                          "rgba(250,246,238,0.15)";
-                        (e.target as HTMLInputElement).style.background =
-                          "rgba(250,246,238,0.1)";
-                      }}
-                    />
-                    <input
-                      type="email"
-                      placeholder={dict.waitlist.emailPlaceholder}
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      className="flex-1 px-5 py-4 rounded-xl text-base font-medium outline-none transition-all"
-                      style={{
-                        background: "rgba(250,246,238,0.1)",
-                        border: "1px solid rgba(250,246,238,0.15)",
-                        color: "#FAF6EE",
-                      }}
-                      onFocus={(e) => {
-                        (e.target as HTMLInputElement).style.borderColor =
-                          "#E8A838";
-                        (e.target as HTMLInputElement).style.background =
-                          "rgba(250,246,238,0.12)";
-                      }}
-                      onBlur={(e) => {
-                        (e.target as HTMLInputElement).style.borderColor =
-                          "rgba(250,246,246,0.15)";
-                        (e.target as HTMLInputElement).style.background =
-                          "rgba(250,246,238,0.1)";
-                      }}
-                    />
-                  </div>
-                  <input
-                    type="tel"
-                    placeholder={dict.waitlist.phonePlaceholder}
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    required
-                    className="w-full px-5 py-4 rounded-xl text-base font-medium outline-none transition-all"
-                    style={{
-                      background: "rgba(250,246,238,0.1)",
-                      border: "1px solid rgba(250,246,238,0.15)",
-                      color: "#FAF6EE",
-                    }}
-                    onFocus={(e) => {
-                      (e.target as HTMLInputElement).style.borderColor =
-                        "#E8A838";
-                      (e.target as HTMLInputElement).style.background =
-                        "rgba(250,246,238,0.12)";
-                    }}
-                    onBlur={(e) => {
-                      (e.target as HTMLInputElement).style.borderColor =
-                        "rgba(250,246,238,0.15)";
-                      (e.target as HTMLInputElement).style.background =
-                        "rgba(250,246,238,0.1)";
-                    }}
-                  />
-                  <motion.button
-                    type="submit"
-                    disabled={joining}
-                    whileHover={{ scale: joining ? 1 : 1.02, y: joining ? 0 : -2 }}
-                    whileTap={{ scale: 0.97 }}
-                    className="w-full py-4 rounded-xl font-bold text-base transition-all flex items-center justify-center gap-3"
-                    style={{
-                      background: joining
-                        ? "rgba(232,168,56,0.7)"
-                        : "linear-gradient(135deg, #E8A838, #C85A2A)",
-                      color: "#FAF6EE",
-                      boxShadow: joining
-                        ? "none"
-                        : "0 8px 24px rgba(200,90,42,0.4)",
-                    }}
-                  >
-                    {joining ? (
-                      <>
-                        <motion.div
-                          animate={{ rotate: 360 }}
-                          transition={{
-                            duration: 0.8,
-                            repeat: Infinity,
-                            ease: "linear",
-                          }}
-                          className="w-4 h-4 rounded-full border-2 border-white/40 border-t-white"
-                        />
-                        {dict.waitlist.joining}
-                      </>
-                    ) : (
-                      <>
-                        <Mail size={16} />
-                        {dict.waitlist.submit}
-                      </>
-                    )}
-                  </motion.button>
-                  {waitlistError && (
-                    <p className="text-sm font-medium" style={{ color: "#E8A838" }}>
-                      {waitlistError}
-                    </p>
-                  )}
-                  <p className="text-sm" style={{ color: "rgba(250,246,238,0.4)" }}>
-                    {dict.waitlist.noSpam}
-                  </p>
-                </motion.form>
-              ) : (
-                <motion.div
-                  key="success"
-                  initial={{ opacity: 0, scale: 0.9, y: 10 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className="rounded-2xl p-10 text-center"
-                  style={{
-                    background: "rgba(232,168,56,0.1)",
-                    border: "1px solid rgba(232,168,56,0.2)",
-                  }}
-                >
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ delay: 0.1, type: "spring", stiffness: 300 }}
-                    className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5"
-                    style={{ background: "rgba(232,168,56,0.2)" }}
-                  >
-                    <CheckCircle size={32} color="#E8A838" />
-                  </motion.div>
-                  <h3
-                    className="font-serif font-bold text-2xl mb-3"
-                    style={{ color: "#FAF6EE" }}
-                  >
-                    {dict.waitlist.successTitle.replace("{name}", name)}
-                  </h3>
-                  <p className="text-base" style={{ color: "rgba(250,246,238,0.6)" }}>
-                    {dict.waitlist.successBody
-                      .replace("{email}", email)
-                      .split(email)
-                      .reduce<React.ReactNode[]>((acc, part, idx, arr) => {
-                        if (idx < arr.length - 1) {
-                          return [
-                            ...acc,
-                            part,
-                            <strong key={idx} style={{ color: "#E8A838" }}>
-                              {email}
-                            </strong>,
-                          ];
-                        }
-                        return [...acc, part];
-                      }, [])}
-                  </p>
-                </motion.div>
-              )}
-            </AnimatePresence>
+              {dict.cta.button}
+              <ArrowRight size={16} />
+            </motion.a>
           </FadeIn>
         </div>
       </section>
 
-      {/* ── Footer ─────────────────────────────────────────────────────────── */}
-      <footer
-        className="py-16 px-6"
-        style={{
-          background: "#3D1010",
-          borderTop: "1px solid rgba(232,168,56,0.08)",
-        }}
-      >
-        <div className="max-w-5xl mx-auto">
-          <div className="flex flex-col md:flex-row items-start justify-between gap-14 mb-14">
-            <div className="max-w-xs">
-              <Logo size={40} />
-              <p
-                className="mt-4 text-sm leading-relaxed"
-                style={{ color: "rgba(250,246,238,0.45)" }}
-              >
-                {dict.footer.brand.description}
-              </p>
-              <div className="flex gap-4 mt-5">
-                {[Globe, Share2, Link, AtSign].map((Icon, i) => (
-                  <motion.a
-                    key={i}
-                    href="#"
-                    whileHover={{ scale: 1.2, color: "#E8A838" }}
-                    className="w-9 h-9 rounded-full flex items-center justify-center transition-colors"
-                    style={{
-                      background: "rgba(250,246,238,0.06)",
-                      color: "rgba(250,246,238,0.4)",
-                    }}
-                  >
-                    <Icon size={15} />
-                  </motion.a>
-                ))}
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-10">
-              {dict.footer.columns.map((col) => (
-                <div key={col.title}>
-                  <p
-                    className="text-sm font-bold uppercase tracking-widest mb-4"
-                    style={{ color: "rgba(250,246,238,0.3)" }}
-                  >
-                    {col.title}
-                  </p>
-                  <ul className="space-y-2.5">
-                    {col.links.map((link) => (
-                      <li key={link}>
-                        <a
-                          href="#"
-                          className="text-sm transition-colors"
-                          style={{ color: "rgba(250,246,238,0.5)" }}
-                          onMouseEnter={(e) =>
-                            ((e.target as HTMLElement).style.color = "#E8A838")
-                          }
-                          onMouseLeave={(e) =>
-                            ((e.target as HTMLElement).style.color =
-                              "rgba(250,246,238,0.5)")
-                          }
-                        >
-                          {link}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div
-            className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8"
-            style={{ borderTop: "1px solid rgba(250,246,238,0.06)" }}
-          >
-            <p className="text-sm" style={{ color: "rgba(250,246,238,0.25)" }}>
-              {dict.footer.copyright}
-            </p>
-            <div className="flex gap-6">
-              {dict.footer.legal.map((l) => (
-                <a
-                  key={l}
-                  href="#"
-                  className="text-sm transition-colors"
-                  style={{ color: "rgba(250,246,238,0.25)" }}
-                  onMouseEnter={(e) =>
-                    ((e.target as HTMLElement).style.color =
-                      "rgba(250,246,238,0.5)")
-                  }
-                  onMouseLeave={(e) =>
-                    ((e.target as HTMLElement).style.color =
-                      "rgba(250,246,238,0.25)")
-                  }
-                >
-                  {l}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer dict={dict} />
     </div>
   );
 }
