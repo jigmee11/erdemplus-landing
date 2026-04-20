@@ -79,7 +79,7 @@ export default function EnrollmentForm({
     setSubmitError(null);
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/academy/erdem/enrollment-request`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/academy/erdem/enrollment-request`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
