@@ -175,6 +175,8 @@
     "paymentHolder": "Ялалт",
     "paymentContactNote": "Once you complete the payment, our team will contact you within 24 hours.",
     "paymentPhoneNote": "Want to talk to us first? Call",
+    "copyLabel": "Copy account number",
+    "copiedLabel": "Copied!",
     "backToHome": "Back to Home",
     "errorDuplicate": "An enrollment request with this email is already pending.",
     "errorGeneric": "Something went wrong. Please try again.",

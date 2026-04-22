@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, CheckCircle, Loader2 } from "lucide-react";
+import { ArrowRight, Check, CheckCircle, Copy, Loader2 } from "lucide-react";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import type { Dict } from "@/app/[lang]/dictionaries";
@@ -45,6 +45,19 @@ export default function EnrollmentForm({
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [isSuccess, setIsSuccess] = useState(false);
+  const [accountCopied, setAccountCopied] = useState(false);
+
+  const ACCOUNT_NUMBER = "MN790004000800073646";
+
+  async function copyAccount() {
+    try {
+      await navigator.clipboard.writeText(ACCOUNT_NUMBER);
+      setAccountCopied(true);
+      setTimeout(() => setAccountCopied(false), 2000);
+    } catch {
+      // clipboard unavailable — fail silently
+    }
+  }
 
   function clearFieldError(field: string) {
     setFieldErrors((prev) => {
@@ -680,12 +693,41 @@ export default function EnrollmentForm({
                       >
                         {dict.enroll.paymentAccountLabel}:
                       </span>
-                      <span
-                        className="font-mono font-semibold break-all"
-                        style={{ color: "#5C1F1F" }}
+                      <button
+                        type="button"
+                        onClick={copyAccount}
+                        aria-label={
+                          accountCopied
+                            ? dict.enroll.copiedLabel
+                            : dict.enroll.copyLabel
+                        }
+                        className="inline-flex items-center gap-1.5 font-mono font-semibold break-all rounded-md px-1.5 py-0.5 -mx-1.5 transition-colors"
+                        style={{
+                          color: "#5C1F1F",
+                          background: accountCopied
+                            ? "rgba(232,168,56,0.18)"
+                            : "transparent",
+                          cursor: "pointer",
+                        }}
                       >
-                        MN790004000800073646
-                      </span>
+                        {ACCOUNT_NUMBER}
+                        {accountCopied ? (
+                          <Check size={14} style={{ color: "#E8A838" }} />
+                        ) : (
+                          <Copy
+                            size={14}
+                            style={{ color: "#9B7B6B" }}
+                          />
+                        )}
+                      </button>
+                      {accountCopied && (
+                        <span
+                          className="text-xs font-medium"
+                          style={{ color: "#E8A838" }}
+                        >
+                          {dict.enroll.copiedLabel}
+                        </span>
+                      )}
                     </div>
                     <div className="flex items-baseline gap-2 flex-wrap">
                       <span
