@@ -115,6 +115,8 @@
  },
  "enroll": {
    "badge": "Аяллаа эхлүүл",
+   "headline": "ERDEM+-д элсэх",
+   "headlineAccent": "өнөөдөр.",
    "firstName": "Нэр",
    "firstNamePlaceholder": "Нэр",
    "lastName": "Овог",

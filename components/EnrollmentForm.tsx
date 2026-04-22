@@ -183,6 +183,22 @@ export default function EnrollmentForm({
           >
             {dict.enroll.badge}
           </div>
+          <h1
+            className="font-serif font-bold leading-tight mb-4"
+            style={{ fontSize: "clamp(2rem, 6vw, 3rem)", color: "#5C1F1F" }}
+          >
+            {dict.enroll.headline}{" "}
+            <span
+              style={{
+                background: "linear-gradient(135deg, #E8A838 30%, #C85A2A)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              {dict.enroll.headlineAccent}
+            </span>
+          </h1>
         </motion.div>
       </section>
 

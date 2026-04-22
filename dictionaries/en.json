@@ -136,6 +136,8 @@
   },
   "enroll": {
     "badge": "Start Your Journey",
+    "headline": "Apply to ERDEM+",
+    "headlineAccent": "Today.",
     "firstName": "First Name",
     "firstNamePlaceholder": "First name",
     "lastName": "Last Name",
