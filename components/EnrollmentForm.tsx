@@ -620,7 +620,7 @@ export default function EnrollmentForm({
                 </h2>
 
                 <p
-                  className="text-base leading-[1.7] mb-3"
+                  className="text-base leading-[1.7] mb-6"
                   style={{ color: "#5C1F1F" }}
                 >
                   {dict.enroll.successBody
@@ -628,11 +628,70 @@ export default function EnrollmentForm({
                     .replace("{program}", programName ?? "")}
                 </p>
 
+                <div
+                  className="rounded-2xl p-5 sm:p-6 mb-6 text-left"
+                  style={{
+                    background: "rgba(232,168,56,0.08)",
+                    border: "1px solid rgba(232,168,56,0.3)",
+                  }}
+                >
+                  <p
+                    className="text-xs font-semibold tracking-wide uppercase mb-3"
+                    style={{ color: "#C85A2A" }}
+                  >
+                    {dict.enroll.paymentTitle}
+                  </p>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex items-baseline gap-2 flex-wrap">
+                      <span
+                        className="font-medium"
+                        style={{ color: "#9B7B6B" }}
+                      >
+                        {dict.enroll.paymentAccountLabel}:
+                      </span>
+                      <span
+                        className="font-mono font-semibold break-all"
+                        style={{ color: "#5C1F1F" }}
+                      >
+                        MN790004000800073646
+                      </span>
+                    </div>
+                    <div className="flex items-baseline gap-2 flex-wrap">
+                      <span
+                        className="font-medium"
+                        style={{ color: "#9B7B6B" }}
+                      >
+                        {dict.enroll.paymentBankLabel}:
+                      </span>
+                      <span
+                        className="font-semibold"
+                        style={{ color: "#5C1F1F" }}
+                      >
+                        {dict.enroll.paymentBank}
+                      </span>
+                    </div>
+                    <div className="flex items-baseline gap-2 flex-wrap">
+                      <span
+                        className="font-medium"
+                        style={{ color: "#9B7B6B" }}
+                      >
+                        {dict.enroll.paymentHolderLabel}:
+                      </span>
+                      <span
+                        className="font-semibold"
+                        style={{ color: "#5C1F1F" }}
+                      >
+                        {dict.enroll.paymentHolder}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
                 <p
                   className="text-sm leading-[1.7] mb-8"
                   style={{ color: "#9B7B6B" }}
                 >
-                  {dict.enroll.successBodyEmail.replace("{email}", email)}
+                  {dict.enroll.paymentContactNote}
                 </p>
 
                 <motion.a
