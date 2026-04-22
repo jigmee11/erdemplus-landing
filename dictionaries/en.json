@@ -136,9 +136,6 @@
   },
   "enroll": {
     "badge": "Start Your Journey",
-    "headline": "Apply to ERDEM+",
-    "headlineAccent": "Today.",
-    "subtitle": "Get access to adaptive learning, expert 1-on-1 counseling, and a personalized study plan — built around your goals.",
     "firstName": "First Name",
     "firstNamePlaceholder": "First name",
     "lastName": "Last Name",
