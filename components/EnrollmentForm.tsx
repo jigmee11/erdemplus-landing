@@ -130,6 +130,21 @@ export default function EnrollmentForm({
       ? dict.enroll.satMathTitle
       : dict.enroll.satFullTitle;
 
+  const priceAmount =
+    programType === "SAT_FULL" && durationDays === 60
+      ? 600000
+      : programType === "SAT_FULL" && durationDays === 30
+      ? 400000
+      : programType === "SAT_MATH" && durationDays === 60
+      ? 400000
+      : programType === "SAT_MATH" && durationDays === 30
+      ? 250000
+      : null;
+  const formattedPrice =
+    priceAmount !== null
+      ? `${priceAmount.toLocaleString("en-US")}₮`
+      : null;
+
   return (
     <div
       className="gradient-mesh min-h-screen overflow-x-hidden"
@@ -642,6 +657,22 @@ export default function EnrollmentForm({
                     {dict.enroll.paymentTitle}
                   </p>
                   <div className="space-y-2 text-sm">
+                    {formattedPrice && (
+                      <div className="flex items-baseline gap-2 flex-wrap">
+                        <span
+                          className="font-medium"
+                          style={{ color: "#9B7B6B" }}
+                        >
+                          {dict.enroll.paymentAmountLabel}:
+                        </span>
+                        <span
+                          className="font-serif font-bold text-lg"
+                          style={{ color: "#C85A2A" }}
+                        >
+                          {formattedPrice}
+                        </span>
+                      </div>
+                    )}
                     <div className="flex items-baseline gap-2 flex-wrap">
                       <span
                         className="font-medium"
@@ -688,10 +719,24 @@ export default function EnrollmentForm({
                 </div>
 
                 <p
-                  className="text-sm leading-[1.7] mb-8"
+                  className="text-sm leading-[1.7] mb-3"
                   style={{ color: "#9B7B6B" }}
                 >
                   {dict.enroll.paymentContactNote}
+                </p>
+
+                <p
+                  className="text-sm leading-[1.7] mb-8"
+                  style={{ color: "#5C1F1F" }}
+                >
+                  {dict.enroll.paymentPhoneNote}{" "}
+                  <a
+                    href="tel:+97699299880"
+                    className="font-semibold"
+                    style={{ color: "#C85A2A" }}
+                  >
+                    99299880
+                  </a>
                 </p>
 
                 <motion.a
