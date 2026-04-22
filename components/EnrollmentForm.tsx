@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 import type { Dict } from "@/app/[lang]/dictionaries";
 
 type ProgramType = "SAT_MATH" | "SAT_FULL";
-type DurationDays = 30 | 60;
+type DurationDays = 14 | 30;
 
 const inputBase: React.CSSProperties = {
   background: "#FFFFFF",
@@ -144,13 +144,13 @@ export default function EnrollmentForm({
       : dict.enroll.satFullTitle;
 
   const priceAmount =
-    programType === "SAT_FULL" && durationDays === 60
+    programType === "SAT_FULL" && durationDays === 30
       ? 600000
-      : programType === "SAT_FULL" && durationDays === 30
-      ? 400000
-      : programType === "SAT_MATH" && durationDays === 60
+      : programType === "SAT_FULL" && durationDays === 14
       ? 400000
       : programType === "SAT_MATH" && durationDays === 30
+      ? 400000
+      : programType === "SAT_MATH" && durationDays === 14
       ? 250000
       : null;
   const formattedPrice =
@@ -483,11 +483,11 @@ export default function EnrollmentForm({
                     {(
                       [
                         {
-                          value: 30 as DurationDays,
+                          value: 14 as DurationDays,
                           label: dict.enroll.duration1Month,
                         },
                         {
-                          value: 60 as DurationDays,
+                          value: 30 as DurationDays,
                           label: dict.enroll.duration2Months,
                         },
                       ] as const
