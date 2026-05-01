@@ -150,6 +150,7 @@
     "noResultsTitle": "No exact matches",
     "noResultsBody": "Try removing the country or major filter, or use a broader keyword like 'merit' or 'need-based'.",
     "newSearch": "New search",
+    "loadingMore": "Loading {remaining} more…",
     "fullRide": "Full ride",
     "amount": "Amount",
     "deadline": "Deadline",

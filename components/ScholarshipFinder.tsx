@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import {
   Sparkles,
@@ -90,9 +90,10 @@ function rankScholarships(
       if (major !== "any" && !s.majors.includes(major)) return false;
       return true;
     })
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 6);
+    .sort((a, b) => b.score - a.score);
 }
+
+const PAGE_SIZE = 6;
 
 function FadeIn({
   children,
@@ -429,11 +430,13 @@ export default function ScholarshipFinder({ dict }: { dict: Dict }) {
   const [country, setCountry] = useState("any");
   const [stage, setStage] = useState<Stage>("idle");
   const [results, setResults] = useState<Ranked[]>([]);
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [submittedQuery, setSubmittedQuery] = useState<{
     keyword: string;
     major: string;
     country: string;
   } | null>(null);
+  const sentinelRef = useRef<HTMLDivElement | null>(null);
 
   const dbSize = SCHOLARSHIPS.length * 247 + 11; // pretend the DB is way larger
 
@@ -441,6 +444,7 @@ export default function ScholarshipFinder({ dict }: { dict: Dict }) {
     if (stage !== "idle" && stage !== "results") return;
     setStage("embedding");
     setResults([]);
+    setVisibleCount(PAGE_SIZE);
     setSubmittedQuery({ keyword: keyword.trim(), major, country });
 
     await new Promise((r) => setTimeout(r, STAGE_DURATIONS.embedding));
@@ -456,7 +460,26 @@ export default function ScholarshipFinder({ dict }: { dict: Dict }) {
   const reset = () => {
     setStage("idle");
     setResults([]);
+    setVisibleCount(PAGE_SIZE);
   };
+
+  useEffect(() => {
+    if (stage !== "results") return;
+    if (visibleCount >= results.length) return;
+    const node = sentinelRef.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setVisibleCount((c) => Math.min(c + PAGE_SIZE, results.length));
+        }
+      },
+      { rootMargin: "200px 0px" },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [stage, visibleCount, results.length]);
 
   const isSearching =
     stage === "embedding" || stage === "searching" || stage === "ranking";
@@ -725,7 +748,7 @@ export default function ScholarshipFinder({ dict }: { dict: Dict }) {
                           "{count}",
                           results.length.toString(),
                         )
-                      : "k=6"
+                      : "scoring relevance"
                   }
                 />
               </div>
@@ -759,11 +782,31 @@ export default function ScholarshipFinder({ dict }: { dict: Dict }) {
                   </div>
 
                   {results.length > 0 ? (
-                    <div className="grid md:grid-cols-2 gap-5">
-                      {results.map((s, i) => (
-                        <ResultCard key={s.id} s={s} i={i} t={t} />
-                      ))}
-                    </div>
+                    <>
+                      <div className="grid md:grid-cols-2 gap-5">
+                        {results.slice(0, visibleCount).map((s, i) => (
+                          <ResultCard key={s.id} s={s} i={i % PAGE_SIZE} t={t} />
+                        ))}
+                      </div>
+                      {visibleCount < results.length && (
+                        <div
+                          ref={sentinelRef}
+                          className="flex items-center justify-center gap-2 mt-8 py-6"
+                          style={{ color: "#9B7B6B" }}
+                        >
+                          <Loader2
+                            size={14}
+                            style={{ animation: "spin 0.8s linear infinite" }}
+                          />
+                          <span className="text-xs font-semibold uppercase tracking-[0.1em]">
+                            {t.loadingMore.replace(
+                              "{remaining}",
+                              (results.length - visibleCount).toString(),
+                            )}
+                          </span>
+                        </div>
+                      )}
+                    </>
                   ) : (
                     <div
                       className="rounded-2xl p-8 text-center"
