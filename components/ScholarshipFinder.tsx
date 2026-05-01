@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import {
   Sparkles,
@@ -437,16 +437,6 @@ export default function ScholarshipFinder({ dict }: { dict: Dict }) {
 
   const dbSize = SCHOLARSHIPS.length * 247 + 11; // pretend the DB is way larger
 
-  const queryVector = useMemo(() => {
-    const seed = (keyword + major + country) || "explore";
-    return Array.from({ length: 6 }, (_, i) => {
-      const v = Math.abs(
-        Math.sin((seed.charCodeAt(i % seed.length) + 1) * (i + 1)),
-      );
-      return v.toFixed(3);
-    });
-  }, [keyword, major, country]);
-
   const runSearch = async () => {
     if (stage !== "idle" && stage !== "results") return;
     setStage("embedding");
@@ -691,18 +681,12 @@ export default function ScholarshipFinder({ dict }: { dict: Dict }) {
                   boxShadow: "0 4px 20px rgba(92,31,31,0.05)",
                 }}
               >
-                <div className="flex items-center justify-between mb-4">
+                <div className="mb-4">
                   <p
                     className="text-xs font-bold uppercase tracking-[0.1em]"
                     style={{ color: "#9B7B6B" }}
                   >
                     {t.pipelineLabel}
-                  </p>
-                  <p
-                    className="text-xs font-mono"
-                    style={{ color: "#9B7B6B" }}
-                  >
-                    [{queryVector.join(", ")}, …]
                   </p>
                 </div>
                 <StageLine
