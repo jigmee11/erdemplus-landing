@@ -94,6 +94,12 @@
         "specialty": "SAT Expert Counselor",
         "sessions": "100+",
         "bio": "ERDEM+'s lead counselor. Has personally guided 100+ students to their target scores through tailored strategy, deep diagnostic work, and relentless support."
+      },
+      {
+        "name": "John",
+        "specialty": "SAT Reading & Writing Counselor",
+        "sessions": "60+",
+        "bio": "John specializes in the SAT Reading & Writing section. He breaks down passage analysis, grammar rules, and rhetorical reasoning into clear, repeatable patterns that lift student scores fast."
       }
     ]
   },

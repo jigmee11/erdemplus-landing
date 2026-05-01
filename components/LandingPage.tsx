@@ -199,6 +199,14 @@ const COUNSELOR_META = [
     bg: "#F5D8CC",
     featured: true,
   },
+  {
+    specialtyColor: "#E8A838",
+    rating: 5,
+    initials: "J",
+    photo: null,
+    bg: "#F7E8C8",
+    featured: false,
+  },
 ];
 
 // const TESTIMONIAL_META = [
@@ -713,15 +721,15 @@ export default function LandingPage({
             </p>
           </FadeIn>
 
-          <div className="flex justify-center">
+          <div className="grid sm:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {dict.counselors.items.map((c, i) => {
               const meta = COUNSELOR_META[i];
               return (
                 <FadeIn
                   key={i}
-                  delay={0.1}
+                  delay={0.1 + i * 0.1}
                   direction="up"
-                  className="w-full max-w-md"
+                  className="w-full"
                 >
                   <motion.div
                     whileHover={{ y: -8 }}
