@@ -3,6 +3,7 @@
   "nav": {
     "howItWorks": "How It Works",
     "features": "Features",
+    "scholarships": "Scholarships",
     "counselors": "Counselors",
     "testimonials": "Testimonials",
     "joinWaitlist": "Join Waitlist",
@@ -116,6 +117,45 @@
         "text": "The adaptive tests are eerily accurate — within two weeks they already knew I struggled with paired passages more than vocabulary. Scored a 1510 on test day, 390 points above where I started. Genuinely life-changing."
       }
     ]
+  },
+  "scholarshipFinder": {
+    "badge": "Scholarship Database",
+    "title": "Find scholarships",
+    "titleAccent": "that fit you.",
+    "subtitle": "Our AI-powered search scans thousands of merit, need-based, and government scholarships and matches them to your goals — by major, country, and what you're after.",
+    "poweredBy": "AI Powered",
+    "keywordLabel": "What are you looking for?",
+    "keywordPlaceholder": "e.g. full ride for engineering, need-based ivy, STEM PhD funding…",
+    "suggestionChips": [
+      "full ride",
+      "need-based",
+      "STEM research",
+      "international undergrad",
+      "leadership"
+    ],
+    "majorLabel": "Major",
+    "countryLabel": "Country",
+    "anyMajor": "Any major",
+    "anyCountry": "Any country",
+    "searchButton": "Search scholarships",
+    "searching": "Searching…",
+    "dbHint": "Indexed across {count} scholarships and updated weekly.",
+    "pipelineLabel": "Search Pipeline",
+    "stageEmbed": "Embedding query…",
+    "stageEmbedFallback": "exploring open scholarships",
+    "stageSearch": "Searching {count} scholarships…",
+    "stageRank": "Ranking by relevance…",
+    "stageRankDone": "Top {count} ranked",
+    "resultsTitle": "{count} scholarships matched",
+    "noResultsTitle": "No exact matches",
+    "noResultsBody": "Try removing the country or major filter, or use a broader keyword like 'merit' or 'need-based'.",
+    "newSearch": "New search",
+    "fullRide": "Full ride",
+    "amount": "Amount",
+    "deadline": "Deadline",
+    "levelUndergraduate": "Undergrad",
+    "levelGraduate": "Graduate",
+    "levelBoth": "Both"
   },
   "waitlist": {
     "badge": "Limited Early Access",

@@ -29,6 +29,7 @@ import {
 } from "lucide-react";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import ScholarshipFinder from "@/components/ScholarshipFinder";
 import type { Dict } from "@/app/[lang]/dictionaries";
 
 // ─── Puzzle Piece Decorative SVG ────────────────────────────────────────────
@@ -677,6 +678,9 @@ export default function LandingPage({
           </div>
         </div>
       </section>
+
+      {/* ── Scholarship Finder ─────────────────────────────────────────────── */}
+      <ScholarshipFinder dict={dict} />
 
       {/* ── Expert Counselors ──────────────────────────────────────────────── */}
       <section

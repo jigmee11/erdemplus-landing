@@ -18,6 +18,7 @@ export default function Nav({
   const navItems = [
     { label: dict.nav.howItWorks, href: `/${lang}#how-it-works` },
     { label: dict.nav.features, href: `/${lang}#features` },
+    { label: dict.nav.scholarships, href: `/${lang}#scholarships` },
     { label: dict.nav.counselors, href: `/${lang}#counselors` },
   ];
 
