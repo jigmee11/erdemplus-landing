@@ -74,6 +74,18 @@ for (const hardcoded of [
   );
 }
 
+for (const expected of [
+  "applicationForm",
+  "applicationAnswers",
+  "profileFieldMapping",
+]) {
+  assert.equal(
+    enrollmentForm.includes(expected),
+    true,
+    `EnrollmentForm should use dynamic program questions: ${expected}`,
+  );
+}
+
 assert.equal(
   paymentResultClient.includes("const copy ="),
   false,

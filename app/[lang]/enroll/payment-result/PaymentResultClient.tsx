@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { motion } from "framer-motion";
 import { CheckCircle, Clock, Loader2, RefreshCw, XCircle } from "lucide-react";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -104,6 +105,7 @@ export default function PaymentResultClient({
   }, [checkout, error, isLoading, status?.paymentStatus, text]);
 
   const Icon = view.icon;
+  const isPending = !error && checkout && (!status || status.paymentStatus === "pending");
   const amount =
     status?.currency === "MNT"
       ? `₮${status.amount.toLocaleString()}`
@@ -114,32 +116,67 @@ export default function PaymentResultClient({
   return (
     <div className="gradient-mesh min-h-screen overflow-x-hidden" style={{ background: "#FAF6EE" }}>
       <Nav dict={dict} lang={lang} />
-      <main className="px-6 pb-24 pt-36">
-        <section className="mx-auto max-w-xl rounded-3xl bg-white p-8 text-center shadow-[0_12px_40px_rgba(92,31,31,0.10)] sm:p-12">
-          <div
-            className="mx-auto flex h-20 w-20 items-center justify-center rounded-full"
-            style={{ background: view.bg }}
-          >
-            {isLoading && !status ? (
-              <Loader2 size={38} className="animate-spin" style={{ color: view.tone }} />
-            ) : (
-              <Icon size={40} style={{ color: view.tone }} />
+      <main className="px-6 pb-24 pt-32">
+        <motion.section
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+          className="mx-auto grid max-w-4xl overflow-hidden rounded-3xl border shadow-[0_18px_60px_rgba(92,31,31,0.12)] lg:grid-cols-[0.9fr_1.1fr]"
+          style={{ background: "#FFFCF7", borderColor: "rgba(92,31,31,0.08)" }}
+        >
+          <div className="p-8 sm:p-10" style={{ background: "#5C1F1F", color: "#FAF6EE" }}>
+            <div className="text-xs font-bold uppercase tracking-wide" style={{ color: "#E8A838" }}>
+              {dict.enroll.paymentResultTitle}
+            </div>
+            <h1 className="mt-5 font-serif text-4xl font-bold leading-tight">
+              {view.title}
+            </h1>
+            <p className="mt-5 max-w-sm text-sm leading-7" style={{ color: "rgba(250,246,238,0.76)" }}>
+              {view.body}
+            </p>
+
+            {isPending && (
+              <div className="mt-8 flex items-center gap-2">
+                {[0, 1, 2].map((item) => (
+                  <motion.span
+                    key={item}
+                    className="h-2 w-2 rounded-full"
+                    style={{ background: "#E8A838" }}
+                    animate={{ opacity: [0.35, 1, 0.35], scale: [1, 1.35, 1] }}
+                    transition={{
+                      duration: 1.1,
+                      repeat: Infinity,
+                      delay: item * 0.16,
+                      ease: "easeInOut",
+                    }}
+                  />
+                ))}
+              </div>
             )}
           </div>
-          <h1
-            className="mt-7 font-serif text-3xl font-bold leading-tight"
-            style={{ color: "#5C1F1F" }}
-          >
-            {view.title}
-          </h1>
-          <p className="mx-auto mt-4 max-w-md text-sm leading-7" style={{ color: "#9B7B6B" }}>
-            {view.body}
-          </p>
+
+          <div className="p-8 text-center sm:p-10">
+            <motion.div
+              className="mx-auto flex h-24 w-24 items-center justify-center rounded-full"
+              style={{ background: view.bg }}
+              animate={isPending ? { scale: [1, 1.04, 1] } : { scale: 1 }}
+              transition={{ duration: 1.8, repeat: isPending ? Infinity : 0 }}
+            >
+              {isLoading && !status ? (
+                <Loader2 size={42} className="animate-spin" style={{ color: view.tone }} />
+              ) : (
+                <Icon size={44} style={{ color: view.tone }} />
+              )}
+            </motion.div>
 
           {status && (
             <div
-              className="mt-8 space-y-3 rounded-2xl px-5 py-4 text-left text-sm"
-              style={{ background: "#FAF6EE", color: "#5C1F1F" }}
+              className="mt-8 space-y-3 rounded-2xl border px-5 py-4 text-left text-sm"
+              style={{
+                background: "#FAF6EE",
+                borderColor: "rgba(92,31,31,0.08)",
+                color: "#5C1F1F",
+              }}
             >
               {status.programName && (
                 <div className="flex justify-between gap-4">
@@ -168,7 +205,7 @@ export default function PaymentResultClient({
               onClick={loadStatus}
               disabled={!checkout || isLoading}
               className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all disabled:opacity-50"
-              style={{ background: "#5C1F1F", color: "#FAF6EE" }}
+              style={{ background: "#C85A2A", color: "#FAF6EE" }}
             >
               <RefreshCw size={15} className={isLoading ? "animate-spin" : ""} />
               {text.retry}
@@ -181,7 +218,8 @@ export default function PaymentResultClient({
               {text.home}
             </Link>
           </div>
-        </section>
+          </div>
+        </motion.section>
       </main>
       <Footer dict={dict} />
     </div>
