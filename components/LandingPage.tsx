@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import ylaltImg from "@/app/assets/ylalt_naranbaatar.png";
-import { useState, useRef, useEffect } from "react";
+import { useRef } from "react";
 import {
   motion,
   useInView,
@@ -12,20 +12,13 @@ import {
 import {
   BookOpen,
   Brain,
-  LineChart,
-  Video,
   Users,
   Target,
   Star,
   ArrowRight,
-  CheckCircle,
   ChevronRight,
   Sparkles,
-  TrendingUp,
-  Award,
-  Clock,
   BarChart3,
-  User,
 } from "lucide-react";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -133,38 +126,6 @@ function FadeIn({
   );
 }
 
-// ─── Counter ─────────────────────────────────────────────────────────────────
-function AnimatedCounter({
-  target,
-  suffix = "",
-}: {
-  target: number;
-  suffix?: string;
-}) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    if (!isInView) return;
-    const dur = 1800;
-    const steps = 60;
-    const step = target / steps;
-    let cur = 0;
-    const interval = setInterval(() => {
-      cur = Math.min(cur + step, target);
-      setCount(Math.floor(cur));
-      if (cur >= target) clearInterval(interval);
-    }, dur / steps);
-    return () => clearInterval(interval);
-  }, [isInView, target]);
-  return (
-    <span ref={ref}>
-      {count.toLocaleString()}
-      {suffix}
-    </span>
-  );
-}
-
 // ─── Star Rating ─────────────────────────────────────────────────────────────
 function StarRating({ rating }: { rating: number }) {
   return (
@@ -236,7 +197,7 @@ export default function LandingPage({
       <section
         id="hero"
         ref={heroRef}
-        className="relative min-h-[100svh] flex items-center pt-28 sm:pt-24 pb-12 sm:pb-20 overflow-hidden"
+        className="relative min-h-[100svh] flex items-start lg:items-center pt-[calc(5rem+env(safe-area-inset-top))] sm:pt-24 pb-12 sm:pb-20 overflow-hidden"
       >
         <motion.div
           style={{ y: heroY }}

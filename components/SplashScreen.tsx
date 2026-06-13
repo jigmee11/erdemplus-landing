@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { navLogoRef } from './navLogoRef';
 
@@ -59,12 +59,16 @@ export default function SplashScreen({ tagline }: { tagline?: string }) {
 
   // Check sessionStorage once on mount
   useEffect(() => {
-    if (sessionStorage.getItem('erdem-splash-shown')) {
-      setPhase('done');
-    } else {
-      sessionStorage.setItem('erdem-splash-shown', '1');
-      setPhase('assembling');
-    }
+    const timer = window.setTimeout(() => {
+      if (sessionStorage.getItem('erdem-splash-shown')) {
+        setPhase('done');
+      } else {
+        sessionStorage.setItem('erdem-splash-shown', '1');
+        setPhase('assembling');
+      }
+    }, 0);
+
+    return () => window.clearTimeout(timer);
   }, []);
 
   // Hide the navbar logo while splash is active

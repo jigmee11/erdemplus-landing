@@ -60,7 +60,7 @@ export default function Nav({
           <LanguageSwitcher lang={lang} />
           <Link
             href={`/${lang}/enroll`}
-            className="text-sm font-semibold px-4 sm:px-6 py-2 sm:py-2.5 rounded-full transition-all"
+            className="hidden sm:inline-flex text-sm font-semibold px-4 sm:px-6 py-2 sm:py-2.5 rounded-full transition-all"
             style={{ background: "#5C1F1F", color: "#FAF6EE" }}
             onMouseEnter={(e) =>
               ((e.currentTarget as HTMLElement).style.background = "#C85A2A")
