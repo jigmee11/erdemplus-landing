@@ -49,9 +49,6 @@ interface PublicProgram {
   };
 }
 
-interface EnrollmentSubmitResponse {
-  followUpLink: string;
-}
 
 type AnswerValue = string | string[];
 
@@ -111,6 +108,8 @@ export default function EnrollmentForm({
   const [isLoading, setIsLoading] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const [submitted, setSubmitted] = useState(false);
+  const [submittedData, setSubmittedData] = useState<{ firstName: string; programName: string } | null>(null);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -257,9 +256,8 @@ export default function EnrollmentForm({
         },
       );
       if (res.status === 201) {
-        const body = (await res.json()) as EnrollmentSubmitResponse;
-        if (!body.followUpLink) throw new Error("Missing payment link");
-        window.location.assign(body.followUpLink);
+        setSubmittedData({ firstName: applicant.firstName, programName: selectedProgram.name });
+        setSubmitted(true);
         return;
       }
       if (res.status === 409) {
@@ -486,6 +484,45 @@ export default function EnrollmentForm({
               borderColor: "rgba(92,31,31,0.08)",
             }}
           >
+            {submitted && submittedData ? (
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className="flex flex-col items-center gap-5 py-8 text-center"
+              >
+                <div
+                  className="flex h-16 w-16 items-center justify-center rounded-full"
+                  style={{ background: "rgba(92,31,31,0.10)" }}
+                >
+                  <Check size={32} style={{ color: "#5C1F1F" }} />
+                </div>
+                <h2 className="mt-2 font-serif text-2xl font-bold" style={{ color: "#5C1F1F" }}>
+                  {dict.enroll.successTitle}
+                </h2>
+                <p className="max-w-sm text-base leading-7" style={{ color: "#8B6E60" }}>
+                  {formatTemplate(dict.enroll.successBody, {
+                    firstName: submittedData.firstName,
+                    program: submittedData.programName,
+                  })}
+                </p>
+                <p className="max-w-sm text-sm leading-6" style={{ color: "#9B7B6B" }}>
+                  {dict.enroll.successBodyEmail}
+                </p>
+                <a
+                  href={`/${lang}`}
+                  className="mt-3 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all"
+                  style={{
+                    background: "#C85A2A",
+                    color: "#FAF6EE",
+                    boxShadow: "0 10px 26px rgba(200,90,42,0.24)",
+                  }}
+                >
+                  {dict.enroll.backToHome}
+                </a>
+              </motion.div>
+            ) : (
+              <>
             {submitError && (
               <div
                 className="mb-5 rounded-2xl border px-4 py-3 text-sm font-semibold"
@@ -703,6 +740,8 @@ export default function EnrollmentForm({
                 </motion.div>
               )}
             </AnimatePresence>
+              </>
+            )}
           </section>
         </section>
       </main>

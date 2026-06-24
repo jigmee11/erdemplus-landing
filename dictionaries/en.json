@@ -225,7 +225,7 @@
     "submitting": "Creating payment...",
     "successTitle": "Application Submitted!",
     "successBody": "Thank you, {firstName}! We've received your enrollment request for {program}.",
-    "successBodyEmail": "Our team will review your application and send you an email at {email} with next steps. This usually takes 1–2 business days.",
+    "successBodyEmail": "We will contact you back soon.",
     "backToHome": "Back to Home",
     "errorDuplicate": "An enrollment request with this email is already pending.",
     "errorGeneric": "Something went wrong. Please try again.",
