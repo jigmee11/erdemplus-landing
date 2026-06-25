@@ -256,7 +256,7 @@ export default function EnrollmentForm({
         },
       );
       if (res.status === 201) {
-        setSubmittedData({ firstName: applicant.firstName, programName: selectedProgram.name });
+        setSubmittedData({ firstName: applicant.firstName ?? "", programName: selectedProgram.name });
         setSubmitted(true);
         return;
       }
