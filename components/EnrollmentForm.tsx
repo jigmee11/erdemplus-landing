@@ -550,17 +550,11 @@ export default function EnrollmentForm({
                   </p>
                   <div className="mt-5">
                     {programsLoading ? (
-                      <div className="grid gap-4 sm:grid-cols-2">
-                        {[0, 1].map((item) => (
-                          <div
-                            key={item}
-                            className="h-48 animate-pulse rounded-2xl"
-                            style={{
-                              background: "#FAF6EE",
-                              border: "1px solid rgba(92,31,31,0.08)",
-                            }}
-                          />
-                        ))}
+                      <div className="flex flex-col items-center gap-3 py-14">
+                        <Loader2 size={30} className="animate-spin" style={{ color: "#C85A2A" }} />
+                        <p className="text-sm font-medium" style={{ color: "#9B7B6B" }}>
+                          {dict.enroll.programsLoading}
+                        </p>
                       </div>
                     ) : programsError ? (
                       <div
